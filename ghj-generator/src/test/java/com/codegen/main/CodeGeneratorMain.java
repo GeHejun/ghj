@@ -8,12 +8,12 @@ import com.codegen.service.CodeGeneratorManager;
  */
 public class CodeGeneratorMain {
 	
-	private static final String TABLE = "gen_test_demo";
+	private static final String TABLE = "role";
 	
-	private static final String MODEL_NAME = "ITest";
+	private static final String MODEL_NAME = "";
 	
 	private static final String[] TABLES = {
-			"gen_test_demo", "gen_test_demo1"
+			"ghj_authority_role", "ghj_authority_role_permission","ghj_authority_permission","ghj_authority_user","ghj_authority_user_role"
 	};
 	
 	/**
@@ -31,9 +31,9 @@ public class CodeGeneratorMain {
 	public static void main(String[] args) {
 		CodeGeneratorManager cgm = new CodeGeneratorManager();
 		
-		cgm.genCodeWithSimpleName(TABLE);
+//		cgm.genCodeWithSimpleName(TABLE);
 		
-//		cgm.genCodeWithDetailName(TABLES);
+		cgm.genCodeWithDetailName(TABLES);
 		
 //		cgm.genCodeWithCustomName(TABLE, MODEL_NAME);
 	}

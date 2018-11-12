@@ -1,15 +1,15 @@
 package com.codegen.service.impl;
 
+import com.codegen.service.CodeGenerator;
+import com.codegen.service.CodeGeneratorManager;
+import com.codegen.util.StringUtils;
+import freemarker.template.Configuration;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.codegen.service.CodeGenerator;
-import com.codegen.service.CodeGeneratorManager;
-import com.codegen.util.StringUtils;
-
-import freemarker.template.Configuration;
 /**
  * Service层 代码生成器
  * Created by zhh on 2017/09/20.
@@ -35,14 +35,23 @@ public class ServiceGenerator extends CodeGeneratorManager implements CodeGenera
 			logger.info(modelNameUpperCamel + "Service.java 生成成功!");
 			
 			// 创建 Service 接口的实现类
-			File serviceImplFile = new File(PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_SERVICE_IMPL + customMapping
-					+ modelNameUpperCamel + "ServiceImpl.java");
+			File providerServiceImplFile = new File(PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_SERVICE_IMPL + customMapping
+					+ modelNameUpperCamel + "ProviderServiceImpl.java");
 			// 查看父级目录是否存在, 不存在则创建
-			if (!serviceImplFile.getParentFile().exists()) {
-				serviceImplFile.getParentFile().mkdirs();
+			if (!providerServiceImplFile.getParentFile().exists()) {
+				providerServiceImplFile.getParentFile().mkdirs();
 			}
-			cfg.getTemplate("service-impl.ftl").process(data, new FileWriter(serviceImplFile));
-			logger.info(modelNameUpperCamel + "ServiceImpl.java 生成成功!");
+			cfg.getTemplate("provider-service-impl.ftl").process(data, new FileWriter(providerServiceImplFile));
+			logger.info(modelNameUpperCamel + "ProviderServiceImpl.java 生成成功!");
+			// 创建 Service 接口的实现类
+			File consumeServiceImplFile = new File(PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_SERVICE_IMPL + customMapping
+					+ modelNameUpperCamel + "ConsumerServiceImpl.java");
+			// 查看父级目录是否存在, 不存在则创建
+			if (!consumeServiceImplFile.getParentFile().exists()) {
+				consumeServiceImplFile.getParentFile().mkdirs();
+			}
+			cfg.getTemplate("consumer-service-impl.ftl").process(data, new FileWriter(consumeServiceImplFile));
+			logger.info(modelNameUpperCamel + "ConsumerServiceImpl.java 生成成功!");
 		} catch (Exception e) {
 			throw new RuntimeException("Service 生成失败!", e);
 		}

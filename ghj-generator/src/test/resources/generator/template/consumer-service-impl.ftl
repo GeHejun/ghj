@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Created by ${author} on ${date}.
  */
 @Service
-public class ${modelNameUpperCamel}ServiceImpl extends AbstractService<${modelNameUpperCamel}> implements ${modelNameUpperCamel}Service {
+public class ${modelNameUpperCamel}ConsumerServiceImpl extends AbstractService<${modelNameUpperCamel}> implements ${modelNameUpperCamel}Service {
 
     @Autowired
     private ${modelNameUpperCamel}Mapper ${modelNameLowerCamel}Mapper;
