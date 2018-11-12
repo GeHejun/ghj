@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ghj.iml" filepath="$PROJECT_DIR$/ghj.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ghj-api/ghj-api.iml" filepath="$PROJECT_DIR$/ghj-api/ghj-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ghj-common/ghj-common.iml" filepath="$PROJECT_DIR$/ghj-common/ghj-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ghj-generator/ghj-generator.iml" filepath="$PROJECT_DIR$/ghj-generator/ghj-generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ghj-service/ghj-service.iml" filepath="$PROJECT_DIR$/ghj-service/ghj-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ghj-shiro/ghj-shiro.iml" filepath="$PROJECT_DIR$/ghj-shiro/ghj-shiro.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ghj-web/ghj-web.iml" filepath="$PROJECT_DIR$/ghj-web/ghj-web.iml" />
+    </modules>
+  </component>
+</project>

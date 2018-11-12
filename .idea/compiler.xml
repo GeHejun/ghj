@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ghj-api" />
+        <module name="ghj-common" />
+        <module name="ghj-generator" />
+        <module name="ghj-service" />
+        <module name="ghj-shiro" />
+        <module name="ghj-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ghj" target="1.8" />
+      <module name="ghj-api" target="1.8" />
+      <module name="ghj-common" target="1.8" />
+      <module name="ghj-generator" target="1.8" />
+      <module name="ghj-service" target="1.8" />
+      <module name="ghj-shiro" target="1.8" />
+      <module name="ghj-web" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
