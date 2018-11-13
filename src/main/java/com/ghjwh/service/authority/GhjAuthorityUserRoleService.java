@@ -4,7 +4,7 @@ import com.ghjwh.service.Service;
 
 /**
  *
- * Created by ghj on 2018/11/12.
+ * Created by ghj on 2018/11/14.
  */
 public interface GhjAuthorityUserRoleService extends Service<GhjAuthorityUserRole> {
 

@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
- * Created by ghj on 2018/11/12.
+ * Created by ghj on 2018/11/14.
  */
 @Service
 public class GhjAuthorityUserProviderServiceImpl extends AbstractService<GhjAuthorityUser> implements GhjAuthorityUserService {
