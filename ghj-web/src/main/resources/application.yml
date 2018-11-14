@@ -2,8 +2,7 @@ server:
   port: 8081
 spring:
   dubbo:
-    application: service-provider
+    application: consumer
     base-package: com.ghj.service
     registry:
-      address: zookeeper://127.0.0.1
-      port: 2181
+      address: multicast://172.16.219.130:2181

@@ -5,7 +5,7 @@ spring:
     application: service-provider
     base-package: com.ghj
     registry:
-      address: zookeeper://127.0.0.1
+      address: multicast://172.16.219.130:2181
   datasource:
     name: ghj
     username: root

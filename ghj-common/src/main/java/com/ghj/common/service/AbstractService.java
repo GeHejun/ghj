@@ -7,11 +7,13 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import org.apache.ibatis.exceptions.TooManyResultsException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Condition;
 
 /**
  * 基于通用MyBatis Mapper插件的Service接口的实现
  */
+@Component
 public abstract class AbstractService<T> {
 
     @Autowired
