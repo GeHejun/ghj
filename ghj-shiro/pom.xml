@@ -18,6 +18,12 @@
             <version>1.4.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.ghjwh</groupId>
+            <artifactId>ghj-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 
 

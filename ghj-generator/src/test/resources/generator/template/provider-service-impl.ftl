@@ -1,6 +1,6 @@
 package ${basePackage}.service.impl.${sign};
 
-import ${basePackage}.dao.mapper.${sign}.${modelNameUpperCamel}Mapper;
+import ${basePackage}.com.ghj.authority.dao.mapper.${sign}.${modelNameUpperCamel}Mapper;
 import ${basePackage}.model.${sign}.${modelNameUpperCamel};
 import ${basePackage}.service.${sign}.${modelNameUpperCamel}Service;
 import ${basePackage}.service.AbstractService;

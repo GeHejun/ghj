@@ -13,6 +13,7 @@
         <module>ghj-api</module>
         <module>ghj-generator</module>
         <module>ghj-shiro</module>
+        <module>ghj-entity</module>
     </modules>
     <packaging>pom</packaging>
 
