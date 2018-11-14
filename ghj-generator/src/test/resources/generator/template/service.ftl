@@ -1,6 +1,6 @@
-package ${basePackage}.service.${sign};
+package ${basePackage}.com.ghj.service.${sign};
 import ${basePackage}.model.${sign}.${modelNameUpperCamel};
-import ${basePackage}.service.Service;
+import ${basePackage}.com.ghj.service.Service;
 
 /**
  *

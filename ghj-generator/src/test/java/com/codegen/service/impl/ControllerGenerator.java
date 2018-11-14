@@ -30,7 +30,7 @@ public class ControllerGenerator extends CodeGeneratorManager implements CodeGen
 	        if (!controllerFile.getParentFile().exists()) {
 	        	controllerFile.getParentFile().mkdirs();
 	        }
-	        cfg.getTemplate("controller.ftl").process(data, new FileWriter(controllerFile));
+	        cfg.getTemplate("com.ghj.controller.ftl").process(data, new FileWriter(controllerFile));
 			logger.info(modelNameUpperCamel + "Controller.java 生成成功!");
 		} catch (Exception e) {
 			throw new RuntimeException("Controller 生成失败!", e);

@@ -1,7 +1,7 @@
 package com.ghj.service.authority;
 
 
-import com.ghj.authority.Permission;
+import com.ghj.controller.authority.Permission;
 import com.ghj.dao.authority.PermissionMapper;
 import com.ghj.common.service.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;

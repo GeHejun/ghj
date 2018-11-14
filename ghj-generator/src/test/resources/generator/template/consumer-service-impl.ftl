@@ -1,9 +1,9 @@
-package ${basePackage}.service.impl.${sign};
+package ${basePackage}.com.ghj.service.impl.${sign};
 
-import ${basePackage}.com.ghj.authority.dao.mapper.${sign}.${modelNameUpperCamel}Mapper;
+import ${basePackage}.com.ghj.controller.authority.dao.mapper.${sign}.${modelNameUpperCamel}Mapper;
 import ${basePackage}.model.${sign}.${modelNameUpperCamel};
-import ${basePackage}.service.${sign}.${modelNameUpperCamel}Service;
-import ${basePackage}.service.AbstractService;
+import ${basePackage}.com.ghj.service.${sign}.${modelNameUpperCamel}Service;
+import ${basePackage}.com.ghj.service.AbstractService;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -1,6 +1,6 @@
-package ${basePackage}.web.controller.${sign};
+package ${basePackage}.web.com.ghj.controller.${sign};
 import ${basePackage}.model.${sign}.${modelNameUpperCamel};
-import ${basePackage}.service.${sign}.${modelNameUpperCamel}Service;
+import ${basePackage}.com.ghj.service.${sign}.${modelNameUpperCamel}Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.RequestMapping;

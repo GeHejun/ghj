@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ghj-service</artifactId>
+    <artifactId>ghj-com.ghj.service</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>

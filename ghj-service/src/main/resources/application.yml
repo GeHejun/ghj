@@ -1,0 +1,10 @@
+server:
+  port: 8082
+spring:
+  dubbo:
+    application: service-provider
+    base-package: com.ghj.service
+    registry:
+      address: zookeeper://127.0.0.1
+      port: 2181
+

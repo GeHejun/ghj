@@ -1,7 +1,6 @@
 package config;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.ghj.authority.User;
 import com.ghj.service.authority.RoleService;
 import com.ghj.service.authority.UserRoleService;
 import com.ghj.service.authority.UserService;
@@ -18,7 +17,6 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import tk.mybatis.mapper.entity.Condition;
 
 public class CustomRealm extends AuthorizingRealm {
 

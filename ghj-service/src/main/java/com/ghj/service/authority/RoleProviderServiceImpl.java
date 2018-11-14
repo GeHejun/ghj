@@ -1,6 +1,6 @@
 package com.ghj.service.authority;
 
-import com.ghj.authority.Role;
+import com.ghj.controller.authority.Role;
 import com.ghj.dao.authority.RoleMapper;
 import com.ghj.common.service.AbstractService;
 import org.springframework.stereotype.Service;

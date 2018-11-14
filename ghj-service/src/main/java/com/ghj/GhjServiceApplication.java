@@ -6,10 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @EnableAutoConfiguration
-public class GhjWebApplication {
+public class GhjServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(GhjWebApplication.class,args);
+        SpringApplication.run(GhjServiceApplication.class,args);
     }
-
 }

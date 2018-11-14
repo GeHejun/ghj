@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ghjwh.com.ghj.authority.dao.mapper.authority.RoleMapper">
+<mapper namespace="com.ghjwh.com.ghj.controller.authority.dao.mapper.authority.RoleMapper">
   <resultMap id="BaseResultMap" type="Role">
     <!--
       WARNING - @mbg.generated
