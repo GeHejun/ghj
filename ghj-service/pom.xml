@@ -23,6 +23,11 @@
             <artifactId>ghj-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.ghjwh</groupId>
+            <artifactId>ghj-entity</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>

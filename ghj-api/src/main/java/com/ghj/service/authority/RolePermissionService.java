@@ -1,7 +1,7 @@
 package com.ghj.service.authority;
 
 
-import com.ghj.controller.authority.RolePermission;
+import com.ghj.entity.authority.RolePermission;
 import com.ghj.service.Service;
 
 /**

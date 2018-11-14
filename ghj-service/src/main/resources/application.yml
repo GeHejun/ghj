@@ -3,17 +3,14 @@ server:
 spring:
   dubbo:
     application: service-provider
-    base-package: com.ghj.service
+    base-package: com.ghj
     registry:
       address: zookeeper://127.0.0.1
-      port: 2181
-    datasource:
-        name: ghj
-        type: com.alibaba.druid.pool.DruidDataSource
-        druid:
-          driver-class-name: com.mysql.jdbc.Driver
-          url: jdbc:mysql://127.0.0.1:3306/ghj
-          username: root
-          password: root
+  datasource:
+    name: ghj
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://loaclhost:3306/ghj
 mybatis:
   mapper-locations: classpath:authority/*Mapper.xml

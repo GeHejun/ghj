@@ -20,8 +20,8 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 --  Table structure for `permission`
 -- ----------------------------
-DROP TABLE IF EXISTS `ghj_authority_permission`;
-CREATE TABLE `ghj_authority_permission` (
+DROP TABLE IF EXISTS `permission`;
+CREATE TABLE `permission` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `type` varchar(32) NOT NULL,
@@ -38,14 +38,14 @@ CREATE TABLE `ghj_authority_permission` (
 --  Records of `permission`
 -- ----------------------------
 BEGIN;
-INSERT INTO `ghj_authority_permission` VALUES ('1', 'admin', 'per', '/admin', 'user:admin', null, null, '1', null);
+INSERT INTO `permission` VALUES ('1', 'admin', 'per', '/admin', 'user:admin', null, null, '1', null);
 COMMIT;
 
 -- ----------------------------
 --  Table structure for `role`
 -- ----------------------------
-DROP TABLE IF EXISTS `ghj_authority_role`;
-CREATE TABLE `ghj_authority_role` (
+DROP TABLE IF EXISTS `role`;
+CREATE TABLE `role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `available` int(11) DEFAULT NULL,
@@ -56,14 +56,14 @@ CREATE TABLE `ghj_authority_role` (
 --  Records of `role`
 -- ----------------------------
 BEGIN;
-INSERT INTO `ghj_authority_role` VALUES ('1', 'admin', null);
+INSERT INTO `role` VALUES ('1', 'admin', null);
 COMMIT;
 
 -- ----------------------------
 --  Table structure for `role_permission`
 -- ----------------------------
-DROP TABLE IF EXISTS `ghj_authority_role_permission`;
-CREATE TABLE `ghj_authority_role_permission` (
+DROP TABLE IF EXISTS `role_permission`;
+CREATE TABLE `role_permission` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `roleid` int(11) DEFAULT NULL,
   `permissionid` int(11) DEFAULT NULL,
@@ -78,14 +78,14 @@ CREATE TABLE `ghj_authority_role_permission` (
 --  Records of `role_permission`
 -- ----------------------------
 BEGIN;
-INSERT INTO `ghj_authority_role_permission` VALUES ('1', '1', '1');
+INSERT INTO `role_permission` VALUES ('1', '1', '1');
 COMMIT;
 
 -- ----------------------------
 --  Table structure for `user`
 -- ----------------------------
-DROP TABLE IF EXISTS `ghj_authority_user`;
-CREATE TABLE `ghj_authority_user` (
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `usercode` varchar(100) NOT NULL,
   `username` varchar(100) NOT NULL,
@@ -99,14 +99,14 @@ CREATE TABLE `ghj_authority_user` (
 --  Records of `user`
 -- ----------------------------
 BEGIN;
-INSERT INTO `ghj_authority_user` VALUES ('1', '1', 'ghj', 'ghj', 'hejun', null), ('2', '2', 'wh', 'wh', 'hejun', null);
+INSERT INTO `user` VALUES ('1', '1', 'ghj', 'ghj', 'hejun', null), ('2', '2', 'wh', 'wh', 'hejun', null);
 COMMIT;
 
 -- ----------------------------
 --  Table structure for `user_role`
 -- ----------------------------
-DROP TABLE IF EXISTS `ghj_authority_user_role`;
-CREATE TABLE `ghj_authority_user_role` (
+DROP TABLE IF EXISTS `user_role`;
+CREATE TABLE `user_role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `userid` int(11) DEFAULT NULL,
   `roleid` int(11) DEFAULT NULL,
@@ -121,7 +121,7 @@ CREATE TABLE `ghj_authority_user_role` (
 --  Records of `user_role`
 -- ----------------------------
 BEGIN;
-INSERT INTO `ghj_authority_user_role` VALUES ('1', '1', '1');
+INSERT INTO `user_role` VALUES ('1', '1', '1');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

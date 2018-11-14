@@ -2,8 +2,7 @@ package com.ghj.service.authority;
 
 
 import com.ghj.common.service.AbstractService;
-import com.ghj.controller.authority.Role;
-import com.ghj.service.authority.RoleService;
+import com.ghj.entity.authority.Role;
 import org.springframework.stereotype.Service;
 
 /**

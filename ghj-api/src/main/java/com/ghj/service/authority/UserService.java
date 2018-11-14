@@ -1,7 +1,7 @@
 package com.ghj.service.authority;
 
 
-import com.ghj.controller.authority.User;
+import com.ghj.entity.authority.User;
 import com.ghj.service.Service;
 
 

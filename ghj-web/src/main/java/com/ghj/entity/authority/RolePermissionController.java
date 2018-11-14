@@ -1,6 +1,6 @@
-package com.ghj.controller.authority;
+package com.ghj.entity.authority;
 
-import com.ghj.service.authority.UserRoleConsumerServiceImpl;
+import com.ghj.service.authority.RolePermissionConsumerServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,45 +16,45 @@ import java.util.List;
  * Created by ghj on 2018/11/14.
  */
 @Controller
-@RequestMapping("/ghjAuthorityUserRole/")
-public class UserRoleController {
+@RequestMapping("/ghjAuthorityRolePermission/")
+public class RolePermissionController {
 
     @Autowired
-    UserRoleConsumerServiceImpl userRoleConsumerService;
+    RolePermissionConsumerServiceImpl rolePermissionConsumerService;
 
     @RequestMapping("add")
     @ResponseBody
-    public String add(UserRole ghjAuthorityUserRole) {
-        userRoleConsumerService.save(ghjAuthorityUserRole);
+    public String add(RolePermission ghjAuthorityRolePermission) {
+        rolePermissionConsumerService.save(ghjAuthorityRolePermission);
         return "";
     }
 
     @RequestMapping("delete")
     @ResponseBody
     public String delete(@RequestParam Integer id) {
-	    userRoleConsumerService.deleteById(id);
+        rolePermissionConsumerService.deleteById(id);
 	    return "";
     }
 
     @RequestMapping("update")
     @ResponseBody
-    public String update(UserRole ghjAuthorityUserRole) {
-	    userRoleConsumerService.update(ghjAuthorityUserRole);
+    public String update(RolePermission ghjAuthorityRolePermission) {
+        rolePermissionConsumerService.update(ghjAuthorityRolePermission);
 	    return "";
     }
 
     @RequestMapping("detail")
     @ResponseBody
     public String detail(@RequestParam Integer id) {
-        UserRole ghjAuthorityUserRole = userRoleConsumerService.findById(id);
-        return ghjAuthorityUserRole.toString();
+        RolePermission ghjAuthorityRolePermission = rolePermissionConsumerService.findById(id);
+        return ghjAuthorityRolePermission.toString();
     }
 
     @RequestMapping("list")
     @ResponseBody
     public String list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
-        List<UserRole> list = userRoleConsumerService.findAll();
+        List<RolePermission> list = rolePermissionConsumerService.findAll();
         PageInfo pageInfo = new PageInfo(list);
         return list.toString();
     }

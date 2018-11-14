@@ -1,4 +1,4 @@
-package com.ghj.controller.authority;
+package com.ghj.entity.authority;
 
 import com.ghj.service.authority.PermissionConsumerServiceImpl;
 import com.github.pagehelper.PageHelper;
