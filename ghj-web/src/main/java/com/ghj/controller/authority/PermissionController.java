@@ -1,6 +1,6 @@
-package controller.authority;
+package com.ghj.controller.authority;
 
-import com.ghj.authority.User;
+import com.ghj.service.authority.PermissionConsumerServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,52 +10,51 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
-import service.authority.UserConsumerServiceImpl;
 
 /**
  *
  * Created by ghj on 2018/11/14.
  */
 @Controller
-@RequestMapping("/ghjAuthorityUser/")
-public class UserController {
+@RequestMapping("/ghjAuthorityPermission/")
+public class PermissionController {
 
     @Autowired
-    UserConsumerServiceImpl userConsumerService;
+    PermissionConsumerServiceImpl permissionConsumerService;
 
     @RequestMapping("add")
     @ResponseBody
-    public String add(User ghjAuthorityUser) {
-        userConsumerService.save(ghjAuthorityUser);
+    public String add(Permission ghjAuthorityPermission) {
+        permissionConsumerService.save(ghjAuthorityPermission);
         return "";
     }
 
     @RequestMapping("delete")
     @ResponseBody
     public String delete(@RequestParam Integer id) {
-	    userConsumerService.deleteById(id);
+        permissionConsumerService.deleteById(id);
 	    return "";
     }
 
     @RequestMapping("update")
     @ResponseBody
-    public String update(User ghjAuthorityUser) {
-	    userConsumerService.update(ghjAuthorityUser);
+    public String update(Permission ghjAuthorityPermission) {
+        permissionConsumerService.update(ghjAuthorityPermission);
 	    return "";
     }
 
     @RequestMapping("detail")
     @ResponseBody
     public String detail(@RequestParam Integer id) {
-        User ghjAuthorityUser = userConsumerService.findById(id);
-        return ghjAuthorityUser.toString();
+        Permission ghjAuthorityPermission = permissionConsumerService.findById(id);
+        return ghjAuthorityPermission.toString();
     }
 
     @RequestMapping("list")
     @ResponseBody
     public String list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
-        List<User> list = userConsumerService.findAll();
+        List<Permission> list = permissionConsumerService.findAll();
         PageInfo pageInfo = new PageInfo(list);
         return list.toString();
     }

@@ -1,11 +1,10 @@
-package service.authority;
+package com.ghj.service.authority;
 
 
-import com.ghj.authority.UserRole;
 import com.ghj.common.service.AbstractService;
+import com.ghj.controller.authority.UserRole;
 import com.ghj.service.authority.UserRoleService;
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *

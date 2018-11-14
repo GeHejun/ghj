@@ -1,6 +1,6 @@
-package controller.authority;
+package com.ghj.controller.authority;
 
-import com.ghj.authority.RolePermission;
+import com.ghj.service.authority.RolePermissionConsumerServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
-import service.authority.RolePermissionConsumerServiceImpl;
 
 /**
  *

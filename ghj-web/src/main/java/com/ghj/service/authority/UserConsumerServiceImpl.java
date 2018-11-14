@@ -1,11 +1,10 @@
-package service.authority;
+package com.ghj.service.authority;
 
 
-import com.ghj.authority.User;
 import com.ghj.common.service.AbstractService;
+import com.ghj.controller.authority.User;
 import com.ghj.service.authority.UserService;
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
