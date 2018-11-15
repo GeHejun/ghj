@@ -1,4 +1,4 @@
-package com.ghj.service;
+package com.ghj.common.service;
 
 import java.util.List;
 import org.apache.ibatis.exceptions.TooManyResultsException;

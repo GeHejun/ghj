@@ -1,6 +1,6 @@
-package com.ghj.entity.authority;
+package com.ghj.controller.authority;
 
-import com.ghj.service.authority.RoleConsumerServiceImpl;
+import com.ghj.service.authority.UserConsumerServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,45 +16,45 @@ import java.util.List;
  * Created by ghj on 2018/11/14.
  */
 @Controller
-@RequestMapping("/ghjAuthorityRole/")
-public class RoleController {
+@RequestMapping("/ghjAuthorityUser/")
+public class UserController {
 
     @Autowired
-    RoleConsumerServiceImpl roleConsumerService;
+    UserConsumerServiceImpl userConsumerService;
 
     @RequestMapping("add")
     @ResponseBody
-    public String add(Role ghjAuthorityRole) {
-        roleConsumerService.save(ghjAuthorityRole);
+    public String add(User ghjAuthorityUser) {
+        userConsumerService.save(ghjAuthorityUser);
         return "";
     }
 
     @RequestMapping("delete")
     @ResponseBody
     public String delete(@RequestParam Integer id) {
-        roleConsumerService.deleteById(id);
+	    userConsumerService.deleteById(id);
 	    return "";
     }
 
     @RequestMapping("update")
     @ResponseBody
-    public String update(Role ghjAuthorityRole) {
-        roleConsumerService.update(ghjAuthorityRole);
+    public String update(User ghjAuthorityUser) {
+	    userConsumerService.update(ghjAuthorityUser);
 	    return "";
     }
 
     @RequestMapping("detail")
     @ResponseBody
     public String detail(@RequestParam Integer id) {
-        Role ghjAuthorityRole = roleConsumerService.findById(id);
-        return ghjAuthorityRole.toString();
+        User ghjAuthorityUser = (User) userConsumerService.findById(id);
+        return ghjAuthorityUser.toString();
     }
 
     @RequestMapping("list")
     @ResponseBody
     public String list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
-        List<Role> list = roleConsumerService.findAll();
+        List<User> list = userConsumerService.findAll();
         PageInfo pageInfo = new PageInfo(list);
         return list.toString();
     }

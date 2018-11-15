@@ -1,6 +1,7 @@
 package com.ghj.common.service;
 
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.ghj.common.mapper.MyMapper;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
@@ -13,15 +14,15 @@ import tk.mybatis.mapper.entity.Condition;
 /**
  * 基于通用MyBatis Mapper插件的Service接口的实现
  */
-@Component
-public abstract class AbstractService<T> {
+@Service
+public abstract class AbstractProviderService<T> {
 
     @Autowired
     protected MyMapper<T> mapper;
 
     private Class<T> modelClass;    // 当前泛型真实类型的Class
 
-    public AbstractService() {
+    public AbstractProviderService() {
         ParameterizedType pt = (ParameterizedType) this.getClass().getGenericSuperclass();
         modelClass = (Class<T>) pt.getActualTypeArguments()[0];
     }

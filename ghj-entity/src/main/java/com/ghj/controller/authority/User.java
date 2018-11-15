@@ -1,4 +1,4 @@
-package com.ghj.entity.authority;
+package com.ghj.controller.authority;
 
 import javax.persistence.*;
 

@@ -1,8 +1,8 @@
 package com.ghj.service.authority;
 
 
-import com.ghj.common.service.AbstractService;
-import com.ghj.entity.authority.Permission;
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.ghj.common.service.AbstractConsumerService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,8 +10,9 @@ import org.springframework.stereotype.Service;
  * Created by ghj on 2018/11/14.
  */
 @Service
-public class PermissionConsumerServiceImpl extends AbstractService<Permission> implements PermissionService {
+public class PermissionConsumerServiceImpl extends AbstractConsumerService implements PermissionService {
 
-
+    @Reference
+    PermissionService permissionService;
 
 }
