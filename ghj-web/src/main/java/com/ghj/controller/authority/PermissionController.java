@@ -1,5 +1,6 @@
 package com.ghj.controller.authority;
 
+import com.ghj.common.vo.PermissionVO;
 import com.ghj.service.authority.PermissionConsumerServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -24,8 +25,8 @@ public class PermissionController {
 
     @RequestMapping("add")
     @ResponseBody
-    public String add(Permission ghjAuthorityPermission) {
-        permissionConsumerService.save(ghjAuthorityPermission);
+    public String add(PermissionVO permissionVO) throws InstantiationException, IllegalAccessException {
+        permissionConsumerService.save(permissionVO);
         return "";
     }
 
@@ -38,23 +39,24 @@ public class PermissionController {
 
     @RequestMapping("update")
     @ResponseBody
-    public String update(Permission ghjAuthorityPermission) {
-        permissionConsumerService.update(ghjAuthorityPermission);
+    public String update(PermissionVO permissionVO) throws InstantiationException, IllegalAccessException {
+        permissionConsumerService.update(permissionVO);
 	    return "";
     }
 
     @RequestMapping("detail")
     @ResponseBody
-    public String detail(@RequestParam Integer id) {
-        Permission ghjAuthorityPermission = permissionConsumerService.findById(id);
-        return ghjAuthorityPermission.toString();
+    public String detail(@RequestParam Integer id) throws InstantiationException, IllegalAccessException {
+        PermissionVO permissionVO = (PermissionVO) permissionConsumerService.findById(id);
+        return permissionVO.toString();
     }
 
     @RequestMapping("list")
     @ResponseBody
-    public String list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
+    public String list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size)
+            throws InstantiationException, IllegalAccessException {
         PageHelper.startPage(page, size);
-        List<Permission> list = permissionConsumerService.findAll();
+        List<PermissionVO> list = permissionConsumerService.findAll();
         PageInfo pageInfo = new PageInfo(list);
         return list.toString();
     }

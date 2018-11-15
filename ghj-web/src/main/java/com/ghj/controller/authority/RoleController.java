@@ -1,5 +1,6 @@
 package com.ghj.controller.authority;
 
+import com.ghj.common.vo.RoleVO;
 import com.ghj.service.authority.RoleConsumerServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -16,7 +17,7 @@ import java.util.List;
  * Created by ghj on 2018/11/14.
  */
 @Controller
-@RequestMapping("/ghjAuthorityRole/")
+@RequestMapping("/authorityRole/")
 public class RoleController {
 
     @Autowired
@@ -24,8 +25,8 @@ public class RoleController {
 
     @RequestMapping("add")
     @ResponseBody
-    public String add(Role ghjAuthorityRole) {
-        roleConsumerService.save(ghjAuthorityRole);
+    public String add(RoleVO roleVO) throws InstantiationException, IllegalAccessException {
+        roleConsumerService.save(roleVO);
         return "";
     }
 
@@ -38,23 +39,24 @@ public class RoleController {
 
     @RequestMapping("update")
     @ResponseBody
-    public String update(Role ghjAuthorityRole) {
-        roleConsumerService.update(ghjAuthorityRole);
+    public String update(RoleVO roleVO) throws InstantiationException, IllegalAccessException {
+        roleConsumerService.update(roleVO);
 	    return "";
     }
 
     @RequestMapping("detail")
     @ResponseBody
-    public String detail(@RequestParam Integer id) {
-        Role ghjAuthorityRole = roleConsumerService.findById(id);
-        return ghjAuthorityRole.toString();
+    public String detail(@RequestParam Integer id) throws InstantiationException, IllegalAccessException {
+        RoleVO roleVO = (RoleVO) roleConsumerService.findById(id);
+        return roleVO.toString();
     }
 
     @RequestMapping("list")
     @ResponseBody
-    public String list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
+    public String list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size)
+            throws InstantiationException, IllegalAccessException {
         PageHelper.startPage(page, size);
-        List<Role> list = roleConsumerService.findAll();
+        List<RoleVO> list = roleConsumerService.findAll();
         PageInfo pageInfo = new PageInfo(list);
         return list.toString();
     }

@@ -1,5 +1,6 @@
 package com.ghj.controller.authority;
 
+import com.ghj.common.vo.RolePermissionVO;
 import com.ghj.service.authority.RolePermissionConsumerServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -24,8 +25,8 @@ public class RolePermissionController {
 
     @RequestMapping("add")
     @ResponseBody
-    public String add(RolePermission ghjAuthorityRolePermission) {
-        rolePermissionConsumerService.save(ghjAuthorityRolePermission);
+    public String add(RolePermissionVO rolePermissionVO) throws InstantiationException, IllegalAccessException {
+        rolePermissionConsumerService.save(rolePermissionVO);
         return "";
     }
 
@@ -38,23 +39,24 @@ public class RolePermissionController {
 
     @RequestMapping("update")
     @ResponseBody
-    public String update(RolePermission ghjAuthorityRolePermission) {
-        rolePermissionConsumerService.update(ghjAuthorityRolePermission);
+    public String update(RolePermissionVO rolePermissionVO) throws InstantiationException, IllegalAccessException {
+        rolePermissionConsumerService.update(rolePermissionVO);
 	    return "";
     }
 
     @RequestMapping("detail")
     @ResponseBody
-    public String detail(@RequestParam Integer id) {
-        RolePermission ghjAuthorityRolePermission = rolePermissionConsumerService.findById(id);
-        return ghjAuthorityRolePermission.toString();
+    public String detail(@RequestParam Integer id) throws InstantiationException, IllegalAccessException {
+        RolePermissionVO rolePermissionVO = (RolePermissionVO) rolePermissionConsumerService.findById(id);
+        return rolePermissionVO.toString();
     }
 
     @RequestMapping("list")
     @ResponseBody
-    public String list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
+    public String list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size)
+            throws InstantiationException, IllegalAccessException {
         PageHelper.startPage(page, size);
-        List<RolePermission> list = rolePermissionConsumerService.findAll();
+        List<RolePermissionVO> list = rolePermissionConsumerService.findAll();
         PageInfo pageInfo = new PageInfo(list);
         return list.toString();
     }

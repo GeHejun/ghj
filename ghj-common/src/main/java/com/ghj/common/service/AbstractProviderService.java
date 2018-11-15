@@ -2,77 +2,160 @@ package com.ghj.common.service;
 
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.ghj.common.dto.BaseDTO;
 import com.ghj.common.mapper.MyMapper;
+import com.ghj.common.model.Model;
+import com.google.common.collect.Lists;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import org.apache.ibatis.exceptions.TooManyResultsException;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Condition;
 
 /**
  * 基于通用MyBatis Mapper插件的Service接口的实现
+ *
+ * @Author GeHejun
  */
 @Service
-public abstract class AbstractProviderService<T> {
+public abstract class AbstractProviderService<T extends BaseDTO, K extends Model> implements com.ghj.service.Service<T>{
 
     @Autowired
-    protected MyMapper<T> mapper;
+    protected MyMapper<K> mapper;
 
-    private Class<T> modelClass;    // 当前泛型真实类型的Class
+    private Class<K> kClass;
+
+    private Class<T> tClass;
 
     public AbstractProviderService() {
         ParameterizedType pt = (ParameterizedType) this.getClass().getGenericSuperclass();
-        modelClass = (Class<T>) pt.getActualTypeArguments()[0];
+        tClass = (Class<T>) pt.getActualTypeArguments()[0];
+        kClass = (Class<K>) pt.getActualTypeArguments()[1];
     }
 
-    public void save(T model) {
-        mapper.insertSelective(model);
+    /**
+     * 保存
+     */
+    @Override
+    public void save(T model) throws IllegalAccessException, InstantiationException {
+        K k = kClass.newInstance();
+        BeanUtils.copyProperties(model, k);
+        mapper.insertSelective(k);
     }
 
-    public void save(List<T> models) {
-        mapper.insertList(models);
+    /**
+     * 批量保存
+     */
+    @Override
+    public void save(List<T> models) throws IllegalAccessException, InstantiationException {
+        List<K> ks = Lists.newArrayList();
+        for (T t : models) {
+            K k = kClass.newInstance();
+            BeanUtils.copyProperties(t, k);
+            ks.add(k);
+        }
+        mapper.insertList(ks);
     }
 
+    /**
+     * 删除
+     */
+    @Override
     public void deleteById(Integer id) {
         mapper.deleteByPrimaryKey(id);
     }
 
+    /**
+     * 批量删除
+     */
+    @Override
     public void deleteByIds(String ids) {
         mapper.deleteByIds(ids);
     }
 
-    public void update(T model) {
-        mapper.updateByPrimaryKeySelective(model);
+    /**
+     * 更新
+     */
+    @Override
+    public void update(T model) throws IllegalAccessException, InstantiationException {
+        K k = kClass.newInstance();
+        BeanUtils.copyProperties(model, k);
+        mapper.updateByPrimaryKeySelective(k);
+    }
+    @Override
+    public T findById(Integer id) throws IllegalAccessException, InstantiationException {
+        T t = tClass.newInstance();
+        K k = mapper.selectByPrimaryKey(id);
+        BeanUtils.copyProperties(k, t);
+        return t;
     }
 
-    public T findById(Integer id) {
-        return mapper.selectByPrimaryKey(id);
-    }
-
+    /**
+     * 这个方法不好（不想使用）
+     */
     @SuppressWarnings("unchecked")
-	public T findBy(String fieldName, Object value) throws TooManyResultsException {
+    @Deprecated
+    @Override
+    public T findBy(String fieldName, Object value) throws TooManyResultsException {
         try {
-            T model = modelClass.newInstance();
-            Field field = modelClass.getDeclaredField(fieldName);
+            K model = kClass.newInstance();
+            Field field = kClass.getDeclaredField(fieldName);
             field.setAccessible(true);
             field.set(model, value);
-            return mapper.selectOne(model);
+            K k = mapper.selectOne(model);
+            T t = tClass.newInstance();
+            BeanUtils.copyProperties(k, t);
+            return t;
         } catch (ReflectiveOperationException e) {
             throw new RuntimeException("查询操作异常!");
         }
     }
 
-    public List<T> findByIds(String ids) {
-        return mapper.selectByIds(ids);
+    /**
+     * 根据id批量查询
+     */
+    @Override
+    public List<T> findByIds(String ids) throws IllegalAccessException, InstantiationException {
+        List<K> ks = mapper.selectByIds(ids);
+        List<T> ts = Lists.newArrayList();
+        for (K k : ks) {
+            T t = tClass.newInstance();
+            BeanUtils.copyProperties(k, t);
+            ts.add(t);
+        }
+        return ts;
     }
 
-    public List<T> findByCondition(Condition condition) {
-        return mapper.selectByCondition(condition);
+    /**
+     * 根据多条件查询
+     */
+    @Override
+    public List<T> findByCondition(Condition condition) throws IllegalAccessException, InstantiationException {
+        List<K> ks = mapper.selectByCondition(condition);
+        List<T> ts = Lists.newArrayList();
+        for (K k : ks) {
+            T t = tClass.newInstance();
+            BeanUtils.copyProperties(k, t);
+            ts.add(t);
+        }
+        return ts;
     }
 
-    public List<T> findAll() {
-        return mapper.selectAll();
+    /**
+     * 查询全部
+     */
+    @Override
+    public List<T> findAll() throws IllegalAccessException, InstantiationException {
+        List<K> ks = mapper.selectAll();
+        List<T> ts = Lists.newArrayList();
+        for (K k : ks) {
+            T t = tClass.newInstance();
+            BeanUtils.copyProperties(k, t);
+            ts.add(t);
+        }
+        return ts;
     }
 }

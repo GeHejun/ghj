@@ -1,9 +1,10 @@
-package com.ghj.controller.authority;
+package com.ghj.entity.authority;
 
+import com.ghj.common.model.Model;
 import javax.persistence.*;
 
 @Table(name = "ghj_authority_role_permission")
-public class RolePermission {
+public class RolePermission extends Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

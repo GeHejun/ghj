@@ -1,5 +1,6 @@
 package com.ghj.controller.authority;
 
+import com.ghj.common.vo.UserRoleVO;
 import com.ghj.service.authority.UserRoleConsumerServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -24,8 +25,8 @@ public class UserRoleController {
 
     @RequestMapping("add")
     @ResponseBody
-    public String add(UserRole ghjAuthorityUserRole) {
-        userRoleConsumerService.save(ghjAuthorityUserRole);
+    public String add(UserRoleVO userRoleVO) throws InstantiationException, IllegalAccessException {
+        userRoleConsumerService.save(userRoleVO);
         return "";
     }
 
@@ -38,23 +39,24 @@ public class UserRoleController {
 
     @RequestMapping("update")
     @ResponseBody
-    public String update(UserRole ghjAuthorityUserRole) {
-	    userRoleConsumerService.update(ghjAuthorityUserRole);
+    public String update(UserRoleVO userRoleVO) throws InstantiationException, IllegalAccessException {
+	    userRoleConsumerService.update(userRoleVO);
 	    return "";
     }
 
     @RequestMapping("detail")
     @ResponseBody
-    public String detail(@RequestParam Integer id) {
-        UserRole ghjAuthorityUserRole = (UserRole) userRoleConsumerService.findById(id);
-        return ghjAuthorityUserRole.toString();
+    public String detail(@RequestParam Integer id) throws InstantiationException, IllegalAccessException {
+        UserRoleVO userRoleVO = (UserRoleVO) userRoleConsumerService.findById(id);
+        return userRoleVO.toString();
     }
 
     @RequestMapping("list")
     @ResponseBody
-    public String list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
+    public String list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size)
+            throws InstantiationException, IllegalAccessException {
         PageHelper.startPage(page, size);
-        List<UserRole> list = userRoleConsumerService.findAll();
+        List<UserRoleVO> list = userRoleConsumerService.findAll();
         PageInfo pageInfo = new PageInfo(list);
         return list.toString();
     }
