@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Created by ghj on 2018/11/14.
  */
 @Service
-public class UserProviderServiceImpl extends AbstractProviderService<UserDTO,User> implements UserService {
+public class UserProviderServiceImpl extends AbstractProviderService<UserDTO,User>{
 
     @Autowired
     private UserMapper ghjAuthorityUserMapper;

@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Created by ghj on 2018/11/14.
  */
 @Service
-public class RoleProviderServiceImpl extends AbstractProviderService<RoleDTO,Role> implements RoleService {
+public class RoleProviderServiceImpl extends AbstractProviderService<RoleDTO,Role>{
 
     @Autowired
     private RoleMapper ghjAuthorityRoleMapper;

@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Created by ghj on 2018/11/14.
  */
 @Service
-public class UserRoleProviderServiceImpl extends AbstractProviderService<UserRoleDTO,UserRole> implements UserRoleService {
+public class UserRoleProviderServiceImpl extends AbstractProviderService<UserRoleDTO,UserRole>{
 
     @Autowired
     private UserRoleMapper userRoleMapper;

@@ -17,4 +17,8 @@ public class UserRoleConsumerServiceImpl extends AbstractConsumerService<UserRol
     @Reference
     UserRoleService userRoleService;
 
+    @Override
+    public void getService() {
+        this.service = userRoleService;
+    }
 }

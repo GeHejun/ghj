@@ -18,4 +18,8 @@ public class UserConsumerServiceImpl extends AbstractConsumerService<UserVO,User
     UserService userService;
 
 
+    @Override
+    public void getService() {
+        this.service = userService;
+    }
 }

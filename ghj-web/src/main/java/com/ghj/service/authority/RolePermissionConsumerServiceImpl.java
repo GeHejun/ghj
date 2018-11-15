@@ -17,4 +17,8 @@ public class RolePermissionConsumerServiceImpl extends AbstractConsumerService<R
     @Reference
     RolePermissionService rolePermissionService;
 
+    @Override
+    public void getService() {
+        this.service = rolePermissionService;
+    }
 }

@@ -17,4 +17,8 @@ public class PermissionConsumerServiceImpl extends AbstractConsumerService<Permi
     @Reference
     PermissionService permissionService;
 
+    @Override
+    public void getService() {
+        this.service = permissionService;
+    }
 }
