@@ -1,9 +1,6 @@
 package com.ghj.service;
 
-import com.google.common.collect.Lists;
 import java.util.List;
-import org.apache.ibatis.exceptions.TooManyResultsException;
-import org.springframework.beans.BeanUtils;
 import tk.mybatis.mapper.entity.Condition;
 
 /**

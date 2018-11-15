@@ -2,7 +2,7 @@ package com.ghj.service.authority;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.ghj.common.dto.RoleDTO;
-import com.ghj.common.service.AbstractProviderService;
+import com.ghj.service.AbstractProviderService;
 import com.ghj.entity.authority.Role;
 import com.ghj.dao.authority.RoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;

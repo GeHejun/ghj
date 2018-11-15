@@ -1,10 +1,10 @@
-package com.ghj.common.service;
+package com.ghj.service;
 
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.ghj.common.dto.BaseDTO;
-import com.ghj.common.mapper.MyMapper;
-import com.ghj.common.model.Model;
+import com.ghj.dao.MyMapper;
+import com.ghj.entity.Model;
 import com.google.common.collect.Lists;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
@@ -12,7 +12,6 @@ import java.util.List;
 import org.apache.ibatis.exceptions.TooManyResultsException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Condition;
 
 /**
@@ -21,7 +20,7 @@ import tk.mybatis.mapper.entity.Condition;
  * @Author GeHejun
  */
 @Service
-public abstract class AbstractProviderService<T extends BaseDTO, K extends Model> implements com.ghj.service.Service<T>{
+public abstract class AbstractProviderService<T extends BaseDTO, K extends Model> implements com.ghj.service.Service<T,K>{
 
     @Autowired
     protected MyMapper<K> mapper;

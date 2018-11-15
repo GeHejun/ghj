@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>com.ghjwh</groupId>
-            <artifactId>ghj-common</artifactId>
+            <artifactId>ghj-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

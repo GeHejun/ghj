@@ -1,8 +1,7 @@
-package com.ghj.common.service;
+package com.ghj.service;
 
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.alibaba.dubbo.config.annotation.Service;
 import com.ghj.common.dto.BaseDTO;
 import com.ghj.common.vo.BaseVO;
 import com.google.common.collect.Lists;
@@ -17,10 +16,10 @@ import tk.mybatis.mapper.entity.Condition;
  * 基于通用MyBatis Mapper插件的Service接口的实现
  */
 @Component
-public abstract class AbstractConsumerService<T extends BaseVO, K extends BaseDTO> implements com.ghj.service.Service<T> {
+public abstract class AbstractConsumerService<T extends BaseVO, K extends BaseDTO> {
 
     @Reference
-    protected AbstractProviderService abstractProviderService;
+    public Service service;
 
     Class<T> tClass;
 
@@ -36,9 +35,8 @@ public abstract class AbstractConsumerService<T extends BaseVO, K extends BaseDT
     public void save(T model) throws IllegalAccessException, InstantiationException {
         K k = kClass.newInstance();
         BeanUtils.copyProperties(model, k);
-        abstractProviderService.save(k);
+        service.save(k);
     }
-    @Override
     public void save(List<T> models) throws IllegalAccessException, InstantiationException {
         List<K> ks = Lists.newArrayList();
         for (T t : models) {
@@ -46,29 +44,26 @@ public abstract class AbstractConsumerService<T extends BaseVO, K extends BaseDT
             BeanUtils.copyProperties(t, k);
             ks.add(k);
         }
-        abstractProviderService.save(ks);
+        service.save(ks);
     }
-    @Override
     public void deleteById(Integer id) {
-        abstractProviderService.deleteById(id);
+        service.deleteById(id);
     }
 
-    @Override
     public void deleteByIds(String ids) {
-        abstractProviderService.deleteByIds(ids);
+        service.deleteByIds(ids);
     }
 
 
     public void update(T model) throws IllegalAccessException, InstantiationException {
         K k = kClass.newInstance();
         BeanUtils.copyProperties(model, k);
-        abstractProviderService.update(k);
+        service.update(k);
     }
 
-    @Override
     public T findById(Integer id) throws IllegalAccessException, InstantiationException {
         T t = tClass.newInstance();
-        K k = (K) abstractProviderService.findById(id);
+        K k = (K) service.findById(id);
         BeanUtils.copyProperties(k, t);
         return t;
     }
@@ -76,9 +71,8 @@ public abstract class AbstractConsumerService<T extends BaseVO, K extends BaseDT
     /**
      * 根据id批量查询
      */
-    @Override
     public List<T> findByIds(String ids) throws IllegalAccessException, InstantiationException {
-        List<K> ks = abstractProviderService.findByIds(ids);
+        List<K> ks = service.findByIds(ids);
         List<T> ts = Lists.newArrayList();
         for (K k : ks) {
             T t = tClass.newInstance();
@@ -91,9 +85,8 @@ public abstract class AbstractConsumerService<T extends BaseVO, K extends BaseDT
     /**
      * 根据多条件查询
      */
-    @Override
     public List<T> findByCondition(Condition condition) throws IllegalAccessException, InstantiationException {
-        List<K> ks = abstractProviderService.findByCondition(condition);
+        List<K> ks = service.findByCondition(condition);
         List<T> ts = Lists.newArrayList();
         for (K k : ks) {
             T t = tClass.newInstance();
@@ -106,9 +99,8 @@ public abstract class AbstractConsumerService<T extends BaseVO, K extends BaseDT
     /**
      * 查询全部
      */
-    @Override
     public List<T> findAll() throws IllegalAccessException, InstantiationException {
-        List<K> ks = abstractProviderService.findAll();
+        List<K> ks = service.findAll();
         List<T> ts = Lists.newArrayList();
         for (K k : ks) {
             T t = tClass.newInstance();
@@ -124,11 +116,10 @@ public abstract class AbstractConsumerService<T extends BaseVO, K extends BaseDT
      */
     @SuppressWarnings("unchecked")
     @Deprecated
-    @Override
     public T findBy(String fieldName, Object value) throws TooManyResultsException {
 
         try {
-            K k = (K) abstractProviderService.findBy(fieldName, value);
+            K k = (K) service.findBy(fieldName, value);
             T t = tClass.newInstance();
             BeanUtils.copyProperties(k, t);
             return t;

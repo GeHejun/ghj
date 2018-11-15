@@ -1,4 +1,4 @@
-package com.ghj.common.mapper;
+package com.ghj.dao;
 
 
 import tk.mybatis.mapper.common.BaseMapper;

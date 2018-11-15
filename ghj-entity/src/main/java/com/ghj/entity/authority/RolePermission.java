@@ -1,6 +1,6 @@
 package com.ghj.entity.authority;
 
-import com.ghj.common.model.Model;
+import com.ghj.entity.Model;
 import javax.persistence.*;
 
 @Table(name = "ghj_authority_role_permission")

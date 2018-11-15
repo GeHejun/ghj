@@ -9,6 +9,6 @@ dubbo:
       enable: false
   registry:
     id: ghj
-    address: multicast://127.0.0.1:2181
+    address: zookeeper://127.0.0.1:2181
   qos:
     enabled: false
