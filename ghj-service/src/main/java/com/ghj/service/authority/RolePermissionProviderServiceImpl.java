@@ -2,9 +2,9 @@ package com.ghj.service.authority;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.ghj.common.dto.RolePermissionDTO;
-import com.ghj.service.AbstractProviderService;
-import com.ghj.entity.authority.RolePermission;
 import com.ghj.dao.authority.RolePermissionMapper;
+import com.ghj.entity.authority.RolePermission;
+import com.ghj.service.AbstractProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -12,9 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Created by ghj on 2018/11/14.
  */
 @Service
-public class RolePermissionProviderServiceImpl extends AbstractProviderService<RolePermissionDTO,RolePermission>{
+public class RolePermissionProviderServiceImpl extends AbstractProviderService<RolePermissionDTO,RolePermission> implements RolePermissionService<RolePermissionDTO,RolePermission>{
 
     @Autowired
-    private RolePermissionMapper ghjAuthorityRolePermissionMapper;
+    private RolePermissionMapper rolePermissionMapper;
+
+
 
 }

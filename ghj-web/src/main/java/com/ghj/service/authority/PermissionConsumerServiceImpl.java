@@ -12,13 +12,11 @@ import org.springframework.stereotype.Service;
  * Created by ghj on 2018/11/14.
  */
 @Service
-public class PermissionConsumerServiceImpl extends AbstractConsumerService<PermissionVO,PermissionDTO> {
+public class PermissionConsumerServiceImpl extends AbstractConsumerService<PermissionVO,PermissionDTO> implements PermissionService<PermissionVO,PermissionDTO>{
 
     @Reference
     PermissionService permissionService;
 
-    @Override
-    public void getService() {
-        this.service = permissionService;
-    }
+
+
 }

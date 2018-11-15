@@ -1,6 +1,7 @@
 package com.ghj.service;
 
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.ghj.common.dto.BaseDTO;
 import com.ghj.common.vo.BaseVO;
 import com.google.common.collect.Lists;
@@ -19,9 +20,9 @@ import tk.mybatis.mapper.entity.Condition;
 public abstract class AbstractConsumerService<T extends BaseVO, K extends BaseDTO> {
 
 
+    @Reference
     public Service service;
 
-    public abstract void getService();
 
     Class<T> tClass;
 
