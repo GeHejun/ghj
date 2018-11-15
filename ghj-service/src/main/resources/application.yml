@@ -1,11 +1,6 @@
 server:
   port: 8082
 spring:
-  dubbo:
-    application: service-provider
-    base-package: com.ghj
-    registry:
-      address: multicast://172.16.219.130:2181
   datasource:
     name: ghj
     username: root
@@ -14,3 +9,16 @@ spring:
     url: jdbc:mysql://loaclhost:3306/ghj
 mybatis:
   mapper-locations: classpath:authority/*Mapper.xml
+
+dubbo:
+  application:
+    id:  ghj-serverice-provider
+    name: ghj-serverice-provider
+    qos:
+      enable: false
+  registry:
+    id: ghj
+    address: multicast://127.0.0.1:2181
+  qos:
+    enabled: false
+

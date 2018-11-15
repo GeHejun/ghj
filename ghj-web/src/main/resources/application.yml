@@ -1,8 +1,14 @@
 server:
   port: 8081
-spring:
-  dubbo:
-    application: consumer
-    base-package: com.ghj.service
-    registry:
-      address: multicast://172.16.219.130:2181
+
+dubbo:
+  application:
+    id:  ghj-serverice-web
+    name: ghj-serverice-web
+    qos:
+      enable: false
+  registry:
+    id: ghj
+    address: multicast://127.0.0.1:2181
+  qos:
+    enabled: false
