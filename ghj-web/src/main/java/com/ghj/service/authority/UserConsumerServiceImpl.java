@@ -17,12 +17,5 @@ public class UserConsumerServiceImpl extends AbstractConsumerService<UserVO,User
 
     @Reference
     UserService userService;
-    @Reference
-    public com.ghj.service.Service service;
 
-
-    @Override
-    public List<UserVO> findAll() throws IllegalAccessException, InstantiationException {
-        return service.findAll();
-    }
 }

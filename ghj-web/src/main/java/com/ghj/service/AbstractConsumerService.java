@@ -20,7 +20,8 @@ public abstract class AbstractConsumerService<T extends BaseVO, K extends BaseDT
 
 
 
-    public Service  service;
+    @Reference
+    public MyService  service;
 
 
     Class<T> tClass;

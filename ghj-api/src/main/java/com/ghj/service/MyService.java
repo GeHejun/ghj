@@ -7,7 +7,7 @@ import tk.mybatis.mapper.entity.Condition;
  * Service 层 基础接口，其他Service 接口 请继承该接口
  * Created by zhh on 2017/09/18.
  */
-public interface Service<T,K> {
+public interface MyService<T,K> {
 
     public void save(T model) throws IllegalAccessException, InstantiationException;
 
