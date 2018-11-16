@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * Created by ghj on 2018/11/14.
  */
 @Service
-public class RoleConsumerServiceImpl extends AbstractConsumerService<RoleVO,RoleDTO> implements RoleService<RoleVO,RoleDTO>{
+public class RoleConsumerServiceImpl extends AbstractConsumerService<RoleVO,RoleDTO>{
     @Reference
     RoleService roleService;
 

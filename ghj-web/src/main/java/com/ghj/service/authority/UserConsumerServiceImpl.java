@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * Created by ghj on 2018/11/14.
  */
 @Service
-public class UserConsumerServiceImpl extends AbstractConsumerService<UserVO,UserDTO> implements UserService<UserVO,UserDTO> {
+public class UserConsumerServiceImpl extends AbstractConsumerService<UserVO,UserDTO>{
 
     @Reference
     UserService userService;
