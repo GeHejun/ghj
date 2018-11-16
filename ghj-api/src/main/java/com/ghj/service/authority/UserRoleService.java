@@ -1,8 +1,7 @@
 package com.ghj.service.authority;
 
 
-import com.ghj.common.dto.UserRoleDTO;
-import com.ghj.entity.authority.UserRole;
+
 import com.ghj.service.Service;
 
 /**

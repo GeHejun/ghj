@@ -2,9 +2,10 @@ package com.ghj.service.authority;
 
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.ghj.common.dto.UserDTO;
+import com.ghj.core.dto.UserDTO;
+import com.ghj.core.vo.UserVO;
 import com.ghj.service.AbstractConsumerService;
-import com.ghj.common.vo.UserVO;
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,11 +13,16 @@ import org.springframework.stereotype.Service;
  * Created by ghj on 2018/11/14.
  */
 @Service
-public class UserConsumerServiceImpl extends AbstractConsumerService<UserVO,UserDTO>{
+public class UserConsumerServiceImpl extends AbstractConsumerService<UserVO,UserDTO> {
 
     @Reference
     UserService userService;
+    @Reference
+    public com.ghj.service.Service service;
 
 
-
+    @Override
+    public List<UserVO> findAll() throws IllegalAccessException, InstantiationException {
+        return service.findAll();
+    }
 }

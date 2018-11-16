@@ -1,4 +1,4 @@
-package com.ghj.common.vo;
+package com.ghj.core.vo;
 
 import sun.awt.SunHints.Value;
 

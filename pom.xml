@@ -14,6 +14,7 @@
         <module>ghj-generator</module>
         <module>ghj-shiro</module>
         <module>ghj-entity</module>
+        <module>ghj-core</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -61,15 +62,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-            <version>1.5.10.RELEASE</version>
-        </dependency>
-
-
-
     </dependencies>
 
     <build>

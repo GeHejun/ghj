@@ -1,7 +1,7 @@
 package com.ghj.service.authority;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.ghj.common.dto.RolePermissionDTO;
+import com.ghj.core.dto.RolePermissionDTO;
 import com.ghj.dao.authority.RolePermissionMapper;
 import com.ghj.entity.authority.RolePermission;
 import com.ghj.service.AbstractProviderService;

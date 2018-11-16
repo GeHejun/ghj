@@ -1,4 +1,4 @@
-package com.ghj.common.dto;
+package com.ghj.core.dto;
 
 public class UserRoleDTO extends BaseDTO {
 

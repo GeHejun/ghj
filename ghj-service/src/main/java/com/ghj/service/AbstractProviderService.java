@@ -1,7 +1,8 @@
 package com.ghj.service;
 
 
-import com.ghj.common.dto.BaseDTO;
+
+import com.ghj.core.dto.BaseDTO;
 import com.ghj.dao.MyMapper;
 import com.ghj.entity.Model;
 import com.google.common.collect.Lists;

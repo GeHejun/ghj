@@ -2,12 +2,11 @@ package com.ghj.service;
 
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.ghj.common.dto.BaseDTO;
-import com.ghj.common.vo.BaseVO;
+import com.ghj.core.dto.BaseDTO;
+import com.ghj.core.vo.BaseVO;
 import com.google.common.collect.Lists;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
-import org.apache.ibatis.exceptions.TooManyResultsException;
 import org.springframework.beans.BeanUtils;
 import tk.mybatis.mapper.entity.Condition;
 
@@ -20,8 +19,8 @@ import tk.mybatis.mapper.entity.Condition;
 public abstract class AbstractConsumerService<T extends BaseVO, K extends BaseDTO> {
 
 
-    @Reference
-    public Service service;
+
+    public Service  service;
 
 
     Class<T> tClass;
@@ -119,7 +118,7 @@ public abstract class AbstractConsumerService<T extends BaseVO, K extends BaseDT
      */
     @SuppressWarnings("unchecked")
     @Deprecated
-    public T findBy(String fieldName, Object value) throws TooManyResultsException {
+    public T findBy(String fieldName, Object value){
 
         try {
             K k = (K) service.findBy(fieldName, value);

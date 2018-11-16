@@ -1,9 +1,8 @@
 package com.ghj.controller.authority;
 
-import com.ghj.common.vo.UserVO;
+
+import com.ghj.core.vo.UserVO;
 import com.ghj.service.authority.UserConsumerServiceImpl;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,9 +54,7 @@ public class UserController {
     @ResponseBody
     public String list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size)
             throws InstantiationException, IllegalAccessException {
-        PageHelper.startPage(page, size);
         List<UserVO> list = userConsumerService.findAll();
-        PageInfo pageInfo = new PageInfo(list);
         return list.toString();
     }
 }

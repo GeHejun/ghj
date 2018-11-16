@@ -1,16 +1,13 @@
 package com.ghj.controller.authority;
 
-import com.ghj.common.vo.PermissionVO;
+import com.ghj.core.vo.PermissionVO;
 import com.ghj.service.authority.PermissionConsumerServiceImpl;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
 
 /**
  *
@@ -55,9 +52,7 @@ public class PermissionController {
     @ResponseBody
     public String list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size)
             throws InstantiationException, IllegalAccessException {
-        PageHelper.startPage(page, size);
         List<PermissionVO> list = permissionConsumerService.findAll();
-        PageInfo pageInfo = new PageInfo(list);
         return list.toString();
     }
 }
