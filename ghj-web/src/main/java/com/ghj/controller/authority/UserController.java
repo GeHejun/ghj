@@ -2,7 +2,8 @@ package com.ghj.controller.authority;
 
 
 import com.ghj.core.vo.UserVO;
-import com.ghj.service.authority.UserConsumerServiceImpl;
+import com.ghj.service.authority.UserConsumerService;
+import com.ghj.service.authority.UserService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    UserConsumerServiceImpl userConsumerService;
+    UserConsumerService userConsumerService;
 
     @RequestMapping("add")
     @ResponseBody

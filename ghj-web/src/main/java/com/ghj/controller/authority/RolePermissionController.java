@@ -1,7 +1,7 @@
 package com.ghj.controller.authority;
 
 import com.ghj.core.vo.RolePermissionVO;
-import com.ghj.service.authority.RolePermissionConsumerServiceImpl;
+import com.ghj.service.authority.RolePermissionConsumerService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import java.util.List;
 public class RolePermissionController {
 
     @Autowired
-    RolePermissionConsumerServiceImpl rolePermissionConsumerService;
+    RolePermissionConsumerService rolePermissionConsumerService;
 
     @RequestMapping("add")
     @ResponseBody

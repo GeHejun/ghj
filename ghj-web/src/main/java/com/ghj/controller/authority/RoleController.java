@@ -2,7 +2,7 @@ package com.ghj.controller.authority;
 
 
 import com.ghj.core.vo.RoleVO;
-import com.ghj.service.authority.RoleConsumerServiceImpl;
+import com.ghj.service.authority.RoleConsumerService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class RoleController {
 
     @Autowired
-    RoleConsumerServiceImpl roleConsumerService;
+    RoleConsumerService roleConsumerService;
 
     @RequestMapping("add")
     @ResponseBody

@@ -25,9 +25,9 @@ spring:
         retries: 2
 mybatis:
   mapper-locations: classpath:authority/*Mapper.xml
-
 server:
   port: 8082
+
 
 
 

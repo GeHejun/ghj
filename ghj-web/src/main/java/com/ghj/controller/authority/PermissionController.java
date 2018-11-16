@@ -1,7 +1,7 @@
 package com.ghj.controller.authority;
 
 import com.ghj.core.vo.PermissionVO;
-import com.ghj.service.authority.PermissionConsumerServiceImpl;
+import com.ghj.service.authority.PermissionConsumerService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class PermissionController {
 
     @Autowired
-    PermissionConsumerServiceImpl permissionConsumerService;
+    PermissionConsumerService permissionConsumerService;
 
     @RequestMapping("add")
     @ResponseBody
