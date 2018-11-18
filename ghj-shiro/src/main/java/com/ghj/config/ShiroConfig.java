@@ -1,4 +1,4 @@
-package config;
+package com.ghj.config;
 
 
 import java.util.LinkedHashMap;
@@ -12,9 +12,6 @@ import org.apache.shiro.mgt.SecurityManager;
 
 @Configuration
 public class ShiroConfig {
-
-
-
 
     @Bean
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {

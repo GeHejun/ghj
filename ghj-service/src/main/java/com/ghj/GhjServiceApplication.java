@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
-@MapperScan(basePackages = {"com.ghj.dao.*","com.ghj.dao.authority.*"},markerInterface = MyMapper.class)
+@MapperScan(basePackages = {"com.ghj.dao.authority"})
 public class GhjServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(GhjServiceApplication.class,args);

@@ -4,7 +4,7 @@ package com.ghj.entity.authority;
 import com.ghj.entity.Model;
 import javax.persistence.*;
 
-@Table(name = "ghj_authority_role")
+@Table(name = "role")
 public class Role extends Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

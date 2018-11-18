@@ -1,5 +1,10 @@
 package com.ghj.core.vo;
 
-public class UserRoleVO extends BaseVO {
+import lombok.Data;
 
+@Data
+public class UserRoleVO extends BaseVO {
+    private Integer userid;
+
+    private Integer roleid;
 }

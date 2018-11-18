@@ -3,7 +3,7 @@ package com.ghj.entity.authority;
 import com.ghj.entity.Model;
 import javax.persistence.*;
 
-@Table(name = "ghj_authority_user_role")
+@Table(name = "user_role")
 public class UserRole  extends Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

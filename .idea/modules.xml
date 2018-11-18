@@ -10,6 +10,8 @@
       <module fileurl="file://$PROJECT_DIR$/ghj-generator/ghj-generator.iml" filepath="$PROJECT_DIR$/ghj-generator/ghj-generator.iml" />
       <module fileurl="file://$PROJECT_DIR$/ghj-service/ghj-service.iml" filepath="$PROJECT_DIR$/ghj-service/ghj-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/ghj-shiro/ghj-shiro.iml" filepath="$PROJECT_DIR$/ghj-shiro/ghj-shiro.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ghj-shiro/ghj-shiro-client/ghj-shiro-client.iml" filepath="$PROJECT_DIR$/ghj-shiro/ghj-shiro-client/ghj-shiro-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ghj-shiro/ghj-shiro-server/ghj-shiro-server.iml" filepath="$PROJECT_DIR$/ghj-shiro/ghj-shiro-server/ghj-shiro-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/ghj-web/ghj-web.iml" filepath="$PROJECT_DIR$/ghj-web/ghj-web.iml" />
     </modules>
   </component>

@@ -11,7 +11,7 @@ spring:
         name: ghj-serverice-provider
       base-package: com.ghj
       registry:
-        address: 127.0.0.1                   # zookeeper注册中心的地址
+        address: 172.16.219.130                   # zookeeper注册中心的地址
         port: 2181                           # zookeeper注册中心的端口
       protocol:
         name: dubbo
@@ -25,6 +25,10 @@ spring:
         retries: 2
 mybatis:
   mapper-locations: classpath:authority/*Mapper.xml
+mapper:
+  mappers: com.ghj.dao.MyMapper
+  not-empty: false
+  identity: mysql
 server:
   port: 8082
 

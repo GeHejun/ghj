@@ -31,7 +31,7 @@ public class ServiceGenerator extends CodeGeneratorManager implements CodeGenera
 			if (!serviceFile.getParentFile().exists()) {
 				serviceFile.getParentFile().mkdirs();
 			}
-			cfg.getTemplate("com.ghj.service.ftl").process(data, new FileWriter(serviceFile));
+			cfg.getTemplate("com.ghj.com.ghj.service.ftl").process(data, new FileWriter(serviceFile));
 			logger.info(modelNameUpperCamel + "Service.java 生成成功!");
 			
 			// 创建 Service 接口的实现类
@@ -41,7 +41,7 @@ public class ServiceGenerator extends CodeGeneratorManager implements CodeGenera
 			if (!providerServiceImplFile.getParentFile().exists()) {
 				providerServiceImplFile.getParentFile().mkdirs();
 			}
-			cfg.getTemplate("provider-com.ghj.service-impl.ftl").process(data, new FileWriter(providerServiceImplFile));
+			cfg.getTemplate("provider-com.ghj.com.ghj.service-impl.ftl").process(data, new FileWriter(providerServiceImplFile));
 			logger.info(modelNameUpperCamel + "ProviderServiceImpl.java 生成成功!");
 			// 创建 Service 接口的实现类
 			File consumeServiceImplFile = new File(PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_SERVICE_IMPL + customMapping
@@ -50,7 +50,7 @@ public class ServiceGenerator extends CodeGeneratorManager implements CodeGenera
 			if (!consumeServiceImplFile.getParentFile().exists()) {
 				consumeServiceImplFile.getParentFile().mkdirs();
 			}
-			cfg.getTemplate("consumer-com.ghj.service-impl.ftl").process(data, new FileWriter(consumeServiceImplFile));
+			cfg.getTemplate("consumer-com.ghj.com.ghj.service-impl.ftl").process(data, new FileWriter(consumeServiceImplFile));
 			logger.info(modelNameUpperCamel + "ConsumerServiceImpl.java 生成成功!");
 		} catch (Exception e) {
 			throw new RuntimeException("Service 生成失败!", e);

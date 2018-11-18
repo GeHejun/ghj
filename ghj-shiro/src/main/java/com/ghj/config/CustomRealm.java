@@ -1,10 +1,13 @@
-package config;
+package com.ghj.config;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.ghj.core.vo.*;
+import com.ghj.service.ShiroService;
 import com.ghj.service.authority.RoleService;
 import com.ghj.service.authority.UserRoleService;
 import com.ghj.service.authority.UserService;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AccountException;
@@ -17,17 +20,14 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
+import tk.mybatis.mapper.entity.Condition;
+import tk.mybatis.mapper.entity.Example;
 
 public class CustomRealm extends AuthorizingRealm {
 
-    @Reference
-    UserService userService;
-
-    @Reference
-    RoleService roleService;
-
-    @Reference
-    UserRoleService userRoleService;
+    @Autowired
+    ShiroService shiroService;
 
 
 
@@ -44,7 +44,8 @@ public class CustomRealm extends AuthorizingRealm {
         System.out.println("————身份认证方法————");
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         // 从数据库获取对应用户名密码的用户
-        String password = userService.findBy("userName",token.getUsername()).getPassword();
+        UserVO userVO = (UserVO) shiroService.findBy("username", token.getPrincipal());
+        String password = userVO.getPassword();
         if (null == password) {
             throw new AccountException("用户名不正确");
         } else if (!password.equals(new String((char[]) token.getCredentials()))) {
@@ -64,12 +65,30 @@ public class CustomRealm extends AuthorizingRealm {
         System.out.println("————权限认证————");
         String username = (String) SecurityUtils.getSubject().getPrincipal();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        Integer id = ((UserVO)shiroService.findBy("userName",username)).getId();
         //获得该用户角色
-        Integer id = userService.findBy("userName",username).getId();
+//        Condition condition = new Condition(UserRoleVO.class);
+//        Example.Criteria criteria = condition.createCriteria();
+//        criteria.andEqualTo("userid",id);
+//        List<UserRoleVO> userRoleVOList = null;
         Set<String> set = new HashSet<>();
-        //需要将 role 封装到 Set 作为 info.setRoles() 的参数
-        set.add(null);
-        //设置该用户拥有的角色
+//        try {
+//            userRoleVOList = (List<UserRoleVO>) shiroService.findByCondition(condition);
+//            userRoleVOList.forEach(userRoleVO -> {
+//                try {
+//                    RoleVO roleVO = (RoleVO)shiroService.findById(userRoleVO.getRoleid());
+//                    set.add(roleVO.getName());
+//                } catch (IllegalAccessException e) {
+//                    e.printStackTrace();
+//                } catch (InstantiationException e) {
+//                    e.printStackTrace();
+//                }
+//            });
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//        } catch (InstantiationException e) {
+//            e.printStackTrace();
+//        }
         info.setRoles(set);
         return info;
     }

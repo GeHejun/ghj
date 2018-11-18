@@ -1,5 +1,7 @@
 package com.ghj.core.dto;
 
-public class UserRoleDTO extends BaseDTO {
+import java.io.Serializable;
+
+public class UserRoleDTO extends BaseDTO implements Serializable {
 
 }

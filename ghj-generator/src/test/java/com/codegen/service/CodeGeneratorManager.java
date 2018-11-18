@@ -290,17 +290,17 @@ public class CodeGeneratorManager extends CodeGeneratorConfig {
         BASE_PACKAGE = prop.getProperty("base.package");
         MODEL_PACKAGE = prop.getProperty("model.package");
         MAPPER_PACKAGE = prop.getProperty("mapper.package");
-        SERVICE_PACKAGE = prop.getProperty("service.package");
-        SERVICE_IMPL_PACKAGE = prop.getProperty("service.impl.package");
-        CONTROLLER_PACKAGE = prop.getProperty("controller.package");
+        SERVICE_PACKAGE = prop.getProperty("com.ghj.service.package");
+        SERVICE_IMPL_PACKAGE = prop.getProperty("com.ghj.service.impl.package");
+        CONTROLLER_PACKAGE = prop.getProperty("com.ghj.controller.package");
 
         MAPPER_INTERFACE_REFERENCE = prop.getProperty("mapper.interface.reference");
-        SERVICE_INTERFACE_REFERENCE = prop.getProperty("service.interface.reference");
-        ABSTRACT_SERVICE_CLASS_REFERENCE = prop.getProperty("abstract.service.class.reference");
+        SERVICE_INTERFACE_REFERENCE = prop.getProperty("com.ghj.service.interface.reference");
+        ABSTRACT_SERVICE_CLASS_REFERENCE = prop.getProperty("abstract.com.ghj.service.class.reference");
 
-        String servicePackage = prop.getProperty("package.path.service");
-        String serviceImplPackage = prop.getProperty("package.path.service.impl");
-        String controllerPackage = prop.getProperty("package.path.controller");
+        String servicePackage = prop.getProperty("package.path.com.ghj.service");
+        String serviceImplPackage = prop.getProperty("package.path.com.ghj.service.impl");
+        String controllerPackage = prop.getProperty("package.path.com.ghj.controller");
 
         PACKAGE_PATH_SERVICE = "".equals(servicePackage) ? packageConvertPath(SERVICE_PACKAGE) : servicePackage;
         PACKAGE_PATH_SERVICE_IMPL = "".equals(serviceImplPackage) ? packageConvertPath(SERVICE_IMPL_PACKAGE) : serviceImplPackage;

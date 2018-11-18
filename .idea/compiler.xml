@@ -12,7 +12,8 @@
         <module name="ghj-entity" />
         <module name="ghj-generator" />
         <module name="ghj-service" />
-        <module name="ghj-shiro" />
+        <module name="ghj-shiro-client" />
+        <module name="ghj-shiro-server" />
         <module name="ghj-web" />
       </profile>
     </annotationProcessing>
@@ -25,6 +26,8 @@
       <module name="ghj-generator" target="1.8" />
       <module name="ghj-service" target="1.8" />
       <module name="ghj-shiro" target="1.8" />
+      <module name="ghj-shiro-client" target="1.8" />
+      <module name="ghj-shiro-server" target="1.8" />
       <module name="ghj-web" target="1.8" />
     </bytecodeTargetLevel>
   </component>

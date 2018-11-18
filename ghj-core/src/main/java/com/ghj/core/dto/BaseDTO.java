@@ -1,5 +1,7 @@
 package com.ghj.core.dto;
 
-public class BaseDTO  {
+import java.io.Serializable;
+
+public class BaseDTO  implements Serializable {
 
 }

@@ -9,6 +9,8 @@
     <file url="file://$PROJECT_DIR$/ghj-generator" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ghj-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ghj-shiro" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ghj-shiro/ghj-shiro-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ghj-shiro/ghj-shiro-server" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ghj-web" charset="UTF-8" />
   </component>
 </project>
