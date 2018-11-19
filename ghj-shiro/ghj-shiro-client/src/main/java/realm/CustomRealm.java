@@ -3,11 +3,7 @@ package realm;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.ghj.core.dto.RoleDTO;
 import com.ghj.core.dto.UserDTO;
-import com.ghj.core.vo.UserVO;
-import com.ghj.service.authority.RoleService;
-import com.ghj.service.authority.UserRoleService;
 import com.ghj.service.authority.UserService;
-import com.google.common.collect.Sets;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -66,7 +62,7 @@ public class CustomRealm extends AuthorizingRealm {
         System.out.println("————权限认证————");
         String username = (String) SecurityUtils.getSubject().getPrincipal();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        Set<String> roles = Sets.newHashSet();
+        Set<String> roles = new HashSet<>();
         List<RoleDTO> roleDTOS = userService.listRolesByUserName(username);
         roleDTOS.forEach(roleDTO -> {
             roles.add(roleDTO.getName());

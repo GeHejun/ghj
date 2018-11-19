@@ -1,0 +1,21 @@
+server:
+  port: 8083
+spring:
+  dubbo:
+    application:
+      name: ghj-serverice-consumer
+    base-package: com.ghj
+    registry:
+#      address: 172.16.219.130                   # zookeeper注册中心的地址
+      address: 127.0.0.1
+      port: 2181                           # zookeeper注册中心的端口
+    protocol:
+      name: dubbo
+      port: -1
+      serialization: hessian2
+    provider:
+      retries: 0                           # 服务调用重试次数，服务发布者不给重试，让服务调用者自己重试
+    consumer:
+      timeout: 3000
+      check: false                         # 服务启动时检查被调用服务是否可用
+      retries: 2

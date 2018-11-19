@@ -1,7 +1,7 @@
 package filter;
 
-import com.ghj.common.OkHttpUtil;
 import com.google.gson.JsonObject;
+import config.OkHttpUtil;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,16 +12,18 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.web.filter.authz.AuthorizationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.StringUtils;
 
-@ConfigurationProperties(prefix = "shiro")
+@PropertySource(value = "classpath:shiro.properties")
 public class ShiroFilter extends AuthorizationFilter {
 
-
+    @Value("${sso.validate.url}")
     public String ssoValidateUrl;
 
+    @Value("${sso.server.login.url}")
     public String ssoServerLoginUrl;
 
 
