@@ -11,7 +11,8 @@ spring:
         name: ghj-serverice-provider
       base-package: com.ghj
       registry:
-        address: 172.16.219.130                   # zookeeper注册中心的地址
+#        address: 172.16.219.130                   # zookeeper注册中心的地址
+        address: 127.0.0.1
         port: 2181                           # zookeeper注册中心的端口
       protocol:
         name: dubbo
