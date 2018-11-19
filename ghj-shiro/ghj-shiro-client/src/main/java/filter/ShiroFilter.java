@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.web.filter.authz.AuthorizationFilter;
@@ -18,9 +19,10 @@ import org.springframework.util.StringUtils;
 @ConfigurationProperties(prefix = "shiro")
 public class ShiroFilter extends AuthorizationFilter {
 
-    public String backUrl;
 
     public String ssoValidateUrl;
+
+    public String ssoServerLoginUrl;
 
 
     @Autowired
@@ -61,13 +63,12 @@ public class ShiroFilter extends AuthorizationFilter {
 
     //不允许访问
     @Override
-    protected boolean onAccessDenied(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception {
+    protected boolean onAccessDenied(ServletRequest servletRequest, ServletResponse servletResponse) throws IOException {
         //地址
-        String ssoServerLoginUrl = "";
+        String backUrl = ((HttpServletRequest)servletRequest).getRequestURL().toString();
+        ssoServerLoginUrl = ssoValidateUrl+"&backUrl="+backUrl;
+        OkHttpUtil.syncGet(ssoServerLoginUrl,null);
         return false;
     }
 
-    public void toLogin() {
-
-    }
 }

@@ -1,6 +1,10 @@
 package com.ghj.service.authority;
 
 
+import com.ghj.core.dto.RoleDTO;
+import com.ghj.core.dto.UserDTO;
+import java.util.List;
+import tk.mybatis.mapper.entity.Condition;
 
 /**
  *
@@ -8,4 +12,7 @@ package com.ghj.service.authority;
  */
 public interface UserService{
 
+    List<RoleDTO> listRolesByUserName(String userName);
+
+    UserDTO findUserDTOByUserName(String userName);
 }

@@ -1,4 +1,4 @@
-package controller;
+package com.ghj.shiro.controller;
 
 import com.ghj.entity.shiro.Token;
 import com.google.gson.Gson;
