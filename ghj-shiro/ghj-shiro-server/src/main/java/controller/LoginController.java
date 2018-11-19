@@ -3,6 +3,8 @@ package controller;
 import com.ghj.entity.shiro.Token;
 import com.google.gson.Gson;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.shiro.SecurityUtils;
@@ -14,6 +16,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @RequestMapping("/sso")
 public class LoginController {
@@ -21,12 +24,32 @@ public class LoginController {
     @Autowired
     StringRedisTemplate stringRedisTemplate;
 
-    @RequestMapping("/login")
-    public String login(HttpServletRequest request) {
-
+    @RequestMapping("/index")
+    public String index(HttpServletRequest request) throws UnsupportedEncodingException {
+        String backUrl = request.getParameter("backUrl");
+        return "redirect:/sso/login?backurl=" + URLEncoder.encode(backUrl, "utf-8");
     }
 
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    public String login(HttpServletRequest request) {
+        Subject subject = SecurityUtils.getSubject();
+        Session session = subject.getSession();
+        String token = session.getId().toString();
+        String tokenResult = stringRedisTemplate.opsForValue().get("sso-server-token" + token);
+        if (StringUtils.isEmpty(tokenResult)) {
+            String backUrl = request.getParameter("backUrl");
+            String userName = (String) subject.getPrincipal();
+            if (backUrl.contains("?")) {
+                return "redirect:"+backUrl+"serverToken:"+tokenResult+"userName:"+userName;
+            } else {
+                return "redirect:"+backUrl+"?serverToken:"+tokenResult+"userName:"+userName;
+            }
+
+        }
+        return "/shiro/login";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(HttpServletRequest request, String userName, String password) {
         if (StringUtils.isEmpty(userName) || StringUtils.isEmpty(password)) {
             throw new RuntimeException("参数不可为空");
@@ -35,9 +58,7 @@ public class LoginController {
         subject.login(new UsernamePasswordToken(userName, password));
         String backUrl = request.getParameter("backUrl");
         String token = UUID.randomUUID().toString().replace("-", "");
-//        String sessionId = subject.getSession().getId().toString();
-//        stringRedisTemplate.opsForValue().set("sso-server-session" + sessionId, token, subject.getSession().getTimeout());
-        stringRedisTemplate.opsForValue().set("sso-server-token" + token, token, subject.getSession().getTimeout() / 1000);
+        stringRedisTemplate.opsForValue().set("sso-server-token" + token, token, subject.getSession().getTimeout());
         return "redirect:/" + backUrl;
     }
 
