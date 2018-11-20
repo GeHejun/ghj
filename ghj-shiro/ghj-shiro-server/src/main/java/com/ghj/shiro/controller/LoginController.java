@@ -1,8 +1,7 @@
 package com.ghj.shiro.controller;
 
-import com.ghj.entity.shiro.Token;
 import com.google.gson.Gson;
-import java.io.Serializable;
+import entity.Token;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.UUID;
@@ -12,7 +11,6 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;

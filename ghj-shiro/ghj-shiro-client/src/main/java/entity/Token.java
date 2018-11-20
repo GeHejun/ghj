@@ -1,4 +1,4 @@
-package com.ghj.entity.shiro;
+package entity;
 
 import lombok.Data;
 
