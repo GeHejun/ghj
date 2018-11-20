@@ -10,15 +10,18 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.filter.authc.AuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 @PropertySource(value = "classpath:shiro.properties")
-public class ShiroFilter extends AuthenticationFilter {
+@Component("xx")
+public class ShiroFilter extends AccessControlFilter {
 
     @Value("${sso.validate.url}")
     public String ssoValidateUrl;
@@ -35,7 +38,7 @@ public class ShiroFilter extends AuthenticationFilter {
     protected boolean isAccessAllowed(ServletRequest servletRequest, ServletResponse servletResponse, Object o) {
         if (!StringUtils.isEmpty(servletRequest)) {
             try {
-                return validate(servletRequest);
+                return this.validate(servletRequest);
             } catch (IOException e) {
                 e.printStackTrace();
             }

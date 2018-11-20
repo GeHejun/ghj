@@ -1,6 +1,7 @@
 package com.ghj.config;
 
 
+import com.ghj.filter.ShiroFilter;
 import com.ghj.realm.CustomRealm;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -8,7 +9,6 @@ import javax.servlet.Filter;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.apache.shiro.web.servlet.ShiroFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -22,10 +22,10 @@ public class ShiroConfig {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         Map<String, Filter> filters = new LinkedHashMap<>();
-        filters.put("shiroFilter", new ShiroFilter());
+        filters.put("xx", new ShiroFilter());
         shiroFilterFactoryBean.setFilters(filters);
         Map<String,String> path = new LinkedHashMap<>();
-        path.put("/**","shiroFilter");
+        path.put("/**","xx");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(path);
         System.out.println("Shiro拦截器工厂类注入成功");
         return shiroFilterFactoryBean;
