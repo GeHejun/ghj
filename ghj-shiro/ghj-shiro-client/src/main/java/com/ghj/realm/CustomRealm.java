@@ -1,4 +1,4 @@
-package realm;
+package com.ghj.realm;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.ghj.core.dto.RoleDTO;

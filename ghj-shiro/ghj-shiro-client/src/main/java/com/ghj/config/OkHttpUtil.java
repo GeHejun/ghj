@@ -1,4 +1,4 @@
-package config;
+package com.ghj.config;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;

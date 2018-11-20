@@ -1,4 +1,4 @@
-package entity;
+package com.ghj.entity;
 
 import lombok.Data;
 

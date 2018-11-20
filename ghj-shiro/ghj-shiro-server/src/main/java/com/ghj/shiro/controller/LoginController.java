@@ -1,7 +1,7 @@
 package com.ghj.shiro.controller;
 
 import com.google.gson.Gson;
-import entity.Token;
+import com.ghj.entity.Token;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.UUID;

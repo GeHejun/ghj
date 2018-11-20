@@ -1,7 +1,7 @@
-package filter;
+package com.ghj.filter;
 
 import com.google.gson.JsonObject;
-import config.OkHttpUtil;
+import com.ghj.config.OkHttpUtil;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +10,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
-import org.apache.shiro.web.filter.authz.AuthorizationFilter;
+import org.apache.shiro.web.filter.authc.AuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -18,7 +18,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.StringUtils;
 
 @PropertySource(value = "classpath:shiro.properties")
-public class ShiroFilter extends AuthorizationFilter {
+public class ShiroFilter extends AuthenticationFilter {
 
     @Value("${sso.validate.url}")
     public String ssoValidateUrl;
@@ -32,9 +32,13 @@ public class ShiroFilter extends AuthorizationFilter {
 
     //允许访问
     @Override
-    protected boolean isAccessAllowed(ServletRequest servletRequest, ServletResponse servletResponse, Object o) throws Exception {
+    protected boolean isAccessAllowed(ServletRequest servletRequest, ServletResponse servletResponse, Object o) {
         if (!StringUtils.isEmpty(servletRequest)) {
-            return validate(servletRequest);
+            try {
+                return validate(servletRequest);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return false;
     }
