@@ -11,5 +11,15 @@
 
     <artifactId>ghj-shiro-client</artifactId>
 
+    <dependencies>
+
+
+        <dependency>
+            <groupId>com.ghjwh</groupId>
+            <artifactId>ghj-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
 
 </project>
