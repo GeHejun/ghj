@@ -1,4 +1,4 @@
-package com.ghj.shiro.controller;
+package com.ghj.controller;
 
 import com.google.gson.Gson;
 import com.ghj.entity.Token;
@@ -12,10 +12,13 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+@Controller
 @RequestMapping("/sso")
 public class LoginController {
 
@@ -61,6 +64,7 @@ public class LoginController {
     }
 
     @RequestMapping("/validate")
+    @ResponseBody
     public String validate(HttpServletRequest request) {
         String tokenParam = request.getParameter("token");
         String token = stringRedisTemplate.opsForValue().get("sso-server-token" + tokenParam);

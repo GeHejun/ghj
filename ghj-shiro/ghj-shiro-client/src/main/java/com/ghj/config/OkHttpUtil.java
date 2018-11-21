@@ -35,26 +35,31 @@ public class OkHttpUtil {
     }
 
     public static String dealParams(String url, Map<String, String> params) {
-        Iterator<String> keys = params.keySet().iterator();
-        Iterator<String> values = params.values().iterator();
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("?");
+        if (params != null) {
+            Iterator<String> keys = params.keySet().iterator();
+            Iterator<String> values = params.values().iterator();
 
-        for (int i = 0; i < params.size(); i++) {
-            String value = null;
-            try {
-                value = URLEncoder.encode(values.next(), "utf-8");
-            } catch (Exception e) {
-                e.printStackTrace();
+
+            for (int i = 0; i < params.size(); i++) {
+                String value = null;
+                try {
+                    value = URLEncoder.encode(values.next(), "utf-8");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                stringBuffer.append(keys.next() + "=" + value);
+                if (i != params.size() - 1) {
+                    stringBuffer.append("&");
+                }
+               return url + stringBuffer.toString();
             }
 
-            stringBuffer.append(keys.next() + "=" + value);
-            if (i != params.size() - 1) {
-                stringBuffer.append("&");
-            }
         }
 
-        return url + stringBuffer.toString();
+        return url;
 
     }
 }

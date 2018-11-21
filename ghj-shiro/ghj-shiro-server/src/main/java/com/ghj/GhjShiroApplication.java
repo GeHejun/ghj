@@ -1,4 +1,4 @@
-package com.ghj.shiro;
+package com.ghj;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
