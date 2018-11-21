@@ -3,7 +3,7 @@ server:
 spring:
   dubbo:
     application:
-      name: ghj-serverice-consumer
+      name: ghj-shiro-consumer
     base-package: com.ghj
     registry:
 #      address: 172.16.219.130                   # zookeeper注册中心的地址
