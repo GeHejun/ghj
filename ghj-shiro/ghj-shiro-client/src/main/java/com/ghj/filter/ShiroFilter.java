@@ -40,7 +40,7 @@ public class ShiroFilter extends AccessControlFilter {
     @Override
     protected boolean isAccessAllowed(ServletRequest servletRequest, ServletResponse servletResponse, Object o) {
         if ("server".equals(ssoType)) {
-            return getSubject(servletRequest,servletResponse).isAuthenticated();
+            return true;
         }
         if (!StringUtils.isEmpty(servletRequest)) {
             try {

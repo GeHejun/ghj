@@ -23,7 +23,7 @@ spring:
       consumer:
         timeout: 3000
         check: false                         # 服务启动时检查被调用服务是否可用
-        retries: 2
+        retries: 0
 mybatis:
   mapper-locations: classpath:authority/*Mapper.xml
 mapper:
