@@ -23,12 +23,15 @@ import org.springframework.util.StringUtils;
 @Component("xx")
 public class ShiroFilter extends AccessControlFilter {
 
-    @Value("${sso.validate.url}")
-    public String ssoValidateUrl;
 
     @Value("${sso.server.login.url}")
     public String ssoServerLoginUrl;
 
+    @Value("${sso.validate.url}")
+    public String ssoValidateUrl;
+
+    @Value("${sso.type}")
+    private String ssoType;
 
     @Autowired
     StringRedisTemplate stringRedisTemplate;
@@ -36,9 +39,12 @@ public class ShiroFilter extends AccessControlFilter {
     //允许访问
     @Override
     protected boolean isAccessAllowed(ServletRequest servletRequest, ServletResponse servletResponse, Object o) {
+        if ("server".equals(ssoType)) {
+            return getSubject(servletRequest,servletResponse).isAuthenticated();
+        }
         if (!StringUtils.isEmpty(servletRequest)) {
             try {
-                return this.validate(servletRequest);
+                return this.validate(servletRequest,servletResponse);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -46,8 +52,8 @@ public class ShiroFilter extends AccessControlFilter {
         return false;
     }
     //服务器端验证
-    private boolean validate(ServletRequest request) throws IOException {
-        Session session = SecurityUtils.getSubject().getSession();
+    private boolean validate(ServletRequest request,ServletResponse response) throws IOException {
+        Session session = getSubject(request,response).getSession();
         String token = session.getId().toString();
         String loginMark = stringRedisTemplate.opsForValue().get("sso-client-token" + token);
         if (!StringUtils.isEmpty(loginMark)) {
@@ -75,7 +81,7 @@ public class ShiroFilter extends AccessControlFilter {
     protected boolean onAccessDenied(ServletRequest servletRequest, ServletResponse servletResponse) throws IOException {
         //地址
         String backUrl = ((HttpServletRequest)servletRequest).getRequestURL().toString();
-        ssoServerLoginUrl = ssoValidateUrl+"&backUrl="+backUrl;
+        ssoServerLoginUrl = ssoServerLoginUrl+"?backUrl="+backUrl;
         OkHttpUtil.syncGet(ssoServerLoginUrl,null);
         return false;
     }
