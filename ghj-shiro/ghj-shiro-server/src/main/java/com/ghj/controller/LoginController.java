@@ -13,6 +13,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,7 +33,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public String login(HttpServletRequest request) {
+    public String login(HttpServletRequest request,Model model) {
         Subject subject = SecurityUtils.getSubject();
         Session session = subject.getSession();
         String token = session.getId().toString();
