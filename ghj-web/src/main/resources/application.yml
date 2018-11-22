@@ -17,8 +17,18 @@ spring:
       timeout: 3000
       check: false                         # 服务启动时检查被调用服务是否可用
       retries: 2
+  redis:
+    host: 172.16.219.130
+    port: 6379
 server:
   port: 8081
+
+#  spring.thymeleaf.prefix=classpath:/templates/
+#  spring.thymeleaf.suffix=.html
+#  spring.thymeleaf.mode=HTML
+#  spring.thymeleaf.encoding=UTF-8
+#  spring.thymeleaf.content-type=text/html
+
 
 
 

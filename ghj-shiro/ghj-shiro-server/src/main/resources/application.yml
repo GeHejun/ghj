@@ -19,6 +19,13 @@ spring:
       timeout: 3000
       check: false                         # 服务启动时检查被调用服务是否可用
       retries: 2
+  thymeleaf:
+      prefix: classpath:/templates
+      suffix: .html
+      mode: HTML
+      encoding: UTF-8
+      servlet:
+       content-type: text/html
   redis:
-    port: 6379
     host: 172.16.219.130
+    port: 6379
