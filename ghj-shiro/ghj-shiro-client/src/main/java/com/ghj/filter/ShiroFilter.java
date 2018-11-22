@@ -1,7 +1,7 @@
 package com.ghj.filter;
 
-import com.google.gson.JsonObject;
 import com.ghj.config.OkHttpUtil;
+import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.web.filter.AccessControlFilter;
-import org.apache.shiro.web.filter.authc.AuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+import org.springframework.web.util.WebUtils;
 
 @PropertySource(value = "classpath:shiro.properties")
 @Component("xx")
@@ -38,18 +38,12 @@ public class ShiroFilter extends AccessControlFilter {
 
     //允许访问
     @Override
-    protected boolean isAccessAllowed(ServletRequest servletRequest, ServletResponse servletResponse, Object o) {
+    protected boolean isAccessAllowed(ServletRequest servletRequest, ServletResponse servletResponse, Object o) throws IOException {
         if ("server".equals(ssoType)) {
             return true;
         }
-        if (!StringUtils.isEmpty(servletRequest)) {
-            try {
-                return this.validate(servletRequest,servletResponse);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return false;
+        return this.validate(servletRequest,servletResponse);
+
     }
     //服务器端验证
     private boolean validate(ServletRequest request,ServletResponse response) throws IOException {
@@ -79,10 +73,11 @@ public class ShiroFilter extends AccessControlFilter {
     //不允许访问
     @Override
     protected boolean onAccessDenied(ServletRequest servletRequest, ServletResponse servletResponse) throws IOException {
+        String index;
         //地址
         String backUrl = ((HttpServletRequest)servletRequest).getRequestURL().toString();
-        ssoServerLoginUrl = ssoServerLoginUrl+"?backUrl="+backUrl;
-        OkHttpUtil.syncGet(ssoServerLoginUrl,null);
+        index = ssoServerLoginUrl+"?backUrl="+backUrl;
+        org.apache.shiro.web.util.WebUtils.toHttp(servletResponse).sendRedirect(index);
         return false;
     }
 

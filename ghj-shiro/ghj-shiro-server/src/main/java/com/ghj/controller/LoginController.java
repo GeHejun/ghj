@@ -28,7 +28,7 @@ public class LoginController {
     @RequestMapping("/index")
     public String index(HttpServletRequest request) throws UnsupportedEncodingException {
         String backUrl = request.getParameter("backUrl");
-        return "redirect:/sso/login?backurl=" + URLEncoder.encode(backUrl, "utf-8");
+        return "redirect:/sso/login?backUrl=" + URLEncoder.encode(backUrl, "utf-8");
     }
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
@@ -37,7 +37,7 @@ public class LoginController {
         Session session = subject.getSession();
         String token = session.getId().toString();
         String tokenResult = stringRedisTemplate.opsForValue().get("sso-server-token" + token);
-        if (StringUtils.isEmpty(tokenResult)) {
+        if (!StringUtils.isEmpty(tokenResult)) {
             String backUrl = request.getParameter("backUrl");
             String userName = (String) subject.getPrincipal();
             if (backUrl.contains("?")) {
@@ -47,17 +47,17 @@ public class LoginController {
             }
 
         }
-        return "/shiro/login";
+        return "/login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(HttpServletRequest request, String userName, String password) {
-        if (StringUtils.isEmpty(userName) || StringUtils.isEmpty(password)) {
+    public String login(HttpServletRequest request, String username, String password) {
+        if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
             throw new RuntimeException("参数不可为空");
         }
         Subject subject = SecurityUtils.getSubject();
-        subject.login(new UsernamePasswordToken(userName, password));
-        String backUrl = request.getParameter("backUrl");
+        subject.login(new UsernamePasswordToken(username, password));
+        String backUrl = request.getRequestURL().toString();
         String token = UUID.randomUUID().toString().replace("-", "");
         stringRedisTemplate.opsForValue().set("sso-server-token" + token, token, subject.getSession().getTimeout());
         return "redirect:/" + backUrl;
