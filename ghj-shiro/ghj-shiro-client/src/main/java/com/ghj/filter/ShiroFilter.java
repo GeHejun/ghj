@@ -17,7 +17,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-import org.springframework.web.util.WebUtils;
 
 @PropertySource(value = "classpath:shiro.properties")
 @Component("xx")

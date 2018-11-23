@@ -38,6 +38,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setFilters(filters);
         Map<String,String> path = new LinkedHashMap<>();
         path.put("/favicon.ico","anon");
+        path.put("/static/**","anon");
         path.put("/**","xx");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(path);
         System.out.println("Shiro拦截器工厂类注入成功");
