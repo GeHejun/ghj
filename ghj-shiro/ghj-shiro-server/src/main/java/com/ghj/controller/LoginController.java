@@ -6,6 +6,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
@@ -33,18 +35,20 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public String login(HttpServletRequest request,Model model) {
+    public String login(HttpServletRequest request, HttpServletResponse response) {
         Subject subject = SecurityUtils.getSubject();
         Session session = subject.getSession();
-        String token = session.getId().toString();
-        String tokenResult = stringRedisTemplate.opsForValue().get("sso-server-token" + token);
-        if (!StringUtils.isEmpty(tokenResult)) {
+        String sessionId = session.getId().toString();
+        String token = stringRedisTemplate.opsForValue().get("sso-server-sessionId_" + sessionId);
+        if (!StringUtils.isEmpty(token)) {
             String backUrl = request.getParameter("backUrl");
             String userName = (String) subject.getPrincipal();
+            response.setBufferSize(1024);
             if (backUrl.contains("?")) {
-                return "redirect:"+backUrl+"serverToken:"+tokenResult+"userName:"+userName;
+
+                return "redirect:"+backUrl+"serverToken:"+token+"userName:"+userName;
             } else {
-                return "redirect:"+backUrl+"?serverToken:"+tokenResult+"userName:"+userName;
+                return "redirect:"+backUrl+"?serverToken:"+token+"userName:"+userName;
             }
 
         }
@@ -57,19 +61,24 @@ public class LoginController {
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
             throw new RuntimeException("参数不可为空");
         }
-        Subject subject = SecurityUtils.getSubject();
-        subject.login(new UsernamePasswordToken(username, password));
         String backUrl = request.getParameter("backUrl");
-        String token = UUID.randomUUID().toString().replace("-", "");
-        stringRedisTemplate.opsForValue().set("sso-server-token" + token, token, subject.getSession().getTimeout());
-        return new Token(true);
+        Subject subject = SecurityUtils.getSubject();
+        String sessionId = subject.getSession().getId().toString();
+        String hava = stringRedisTemplate.opsForValue().get("sso-server-sessionId_" + sessionId);
+        if (StringUtils.isEmpty(hava)) {
+            subject.login(new UsernamePasswordToken(username, password));
+            String token = UUID.randomUUID().toString().replace("-", "");
+            stringRedisTemplate.opsForValue().set("sso-server-sessionId_" + sessionId, token, subject.getSession().getTimeout());
+            stringRedisTemplate.opsForValue().set("sso-server-token_" + token, token, subject.getSession().getTimeout());
+        }
+        return new Token(backUrl,true);
     }
 
     @RequestMapping("/validate")
     @ResponseBody
     public String validate(HttpServletRequest request) {
         String tokenParam = request.getParameter("token");
-        String token = stringRedisTemplate.opsForValue().get("sso-server-token" + tokenParam);
+        String token = stringRedisTemplate.opsForValue().get("sso-server-token_" + tokenParam);
         Gson gson = new Gson();
         if (!StringUtils.isEmpty(token)) {
             gson.toJson(new Token(true));

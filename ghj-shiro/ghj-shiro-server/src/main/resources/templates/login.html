@@ -1,80 +1,82 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<!--<script src="/static/jquery-3.0.0.min.js"></script>-->
 <html>
 <head>
     <meta charset="UTF-8"/>
     <title>This is a login page</title>
 </head>
 <body>
-<form>
+<form id="form">
     <label for="username">username:</label><input id="username" name="username">
     <label for="password">username:</label><input id="password" name="password">
-    <!--<input id="backUrl" name="backUrl" value="http://localhost:8081/authorityUser/list">-->
-    <input type="submit" value="登录" onclick="login()">
+    <input id="backUrl" type="hidden" name="backUrl" th:value="${#request.getParameter('backUrl')}">
+    <input value="登录" onclick="login()">
 </form>
 
 <script>
-//     function login() {
-//         $.ajax({
-//             url:'/sso/login',
-//             type: 'POST',
-//             data: {
-//                 username: $('#username').val(),
-//                 password: $('#password').val(),
-//                 backUrl: $('#backUrl').val(),
-//             },
-//             beforeSend: function() {
-//
-//             },
-//             success: function(json){
-// debugger
-//                     location.href = $('#backUrl').val();
-//
-//             },
-//             error: function(error){
-//                 console.log(error);
-//             }
-//         });
-//     }
-var Ajax={
-    get: function(url, fn) {
-        // XMLHttpRequest对象用于在后台与服务器交换数据
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', url, true);
-        xhr.onreadystatechange = function() {
-            // readyState == 4说明请求已完成
-            if (xhr.readyState == 4 && xhr.status == 200 || xhr.status == 304) {
-                // 从服务器获得数据
-                fn.call(this, xhr.responseText);
+
+    function Ajax(type, url, data, success, failed){
+        // 创建ajax对象
+        var xhr = null;
+        if(window.XMLHttpRequest){
+            xhr = new XMLHttpRequest();
+        } else {
+            xhr = new ActiveXObject('Microsoft.XMLHTTP')
+        }
+
+        var type = type.toUpperCase();
+        // 用于清除缓存
+        var random = Math.random();
+
+        if(typeof data == 'object'){
+            var str = '';
+            for(var key in data){
+                str += key+'='+data[key]+'&';
             }
-        };
-        xhr.send();
-    },
-    // datat应为'a=a1&b=b1'这种字符串格式，在jq里如果data为对象会自动将对象转成这种字符串格式
-    post: function (url, data, fn) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", url, true);
-        // 添加http头，发送信息至服务器时内容编码类型
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function() {
-            debugger
-            if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 304)) {
-                fn.call(this, xhr.responseText);
+            data = str.replace(/&$/, '');
+        }
+debugger
+        // if(type == 'GET'){
+        //     if(data){
+        //         xhr.open('GET', url + '?' + data, true);
+        //     } else {
+        //         xhr.open('GET', url + '?t=' + random, true);
+        //     }
+        //     xhr.send();
+        //
+        // } else if(type == 'POST'){
+            xhr.open('POST', url, true);
+            // 如果需要像 html 表单那样 POST 数据，请使用 setRequestHeader() 来添加 http 头。
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.send(data);
+        // }
+
+        // 处理返回数据
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4){
+                if(xhr.status == 200){
+                    success(xhr.responseText);
+                } else {
+                    if(failed){
+                        failed(xhr.status);
+                    }
+                }
             }
-        };
-        xhr.send(data);
+        }
     }
-}
+
 
 function login() {
-    var username = document.getElementById("username");
-    var password = document.getElementById("password");
-    var data = {"username":username,"password":password};
-    Ajax.post("/index/commit",data,function () {
-        debugger
-        window.href = "http://localhost:8081/authorityUser/list";
-    })
+        var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+    var backUrl = document.getElementById("backUrl").value;
+        var data = {"username":username,"password":password,"backUrl":backUrl};
+   Ajax('POST',"/sso/login",data,f);
+
+   function f(data) {
+       console.log(data);
+       location.href = backUrl;
+   }
 }
 
 </script>

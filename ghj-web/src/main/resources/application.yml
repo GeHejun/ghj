@@ -4,8 +4,8 @@ spring:
       name: ghj-serverice-consumer
     base-package: com.ghj
     registry:
-#      address: 172.16.219.130                   # zookeeper注册中心的地址
-      address: 127.0.0.1
+      address: 172.16.219.130                   # zookeeper注册中心的地址
+#      address: 127.0.0.1
       port: 2181                           # zookeeper注册中心的端口
     protocol:
       name: dubbo
@@ -18,7 +18,7 @@ spring:
       check: false                         # 服务启动时检查被调用服务是否可用
       retries: 2
   redis:
-    host: 127.0.0.1
+    host: 172.16.219.130
     port: 6379
 server:
   port: 8081

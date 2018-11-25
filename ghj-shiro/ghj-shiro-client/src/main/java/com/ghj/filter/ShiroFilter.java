@@ -48,9 +48,9 @@ public class ShiroFilter extends AccessControlFilter {
     private boolean validate(ServletRequest request,ServletResponse response) throws IOException {
         Session session = getSubject(request,response).getSession();
         String token = session.getId().toString();
-        String loginMark = stringRedisTemplate.opsForValue().get("sso-client-token" + token);
+        String loginMark = stringRedisTemplate.opsForValue().get("sso-client-sessionId_" + token);
         if (!StringUtils.isEmpty(loginMark)) {
-            stringRedisTemplate.opsForValue().set("sso-client-token" + token,token,SecurityUtils.getSubject().getSession().getTimeout() / 1000);
+            stringRedisTemplate.opsForValue().set("sso-client-sessionId_" + token,token,SecurityUtils.getSubject().getSession().getTimeout() / 1000);
             return true;
         }
         String serverToken = request.getParameter("serverToken");
