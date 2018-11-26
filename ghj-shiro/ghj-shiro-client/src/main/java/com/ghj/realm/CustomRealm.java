@@ -21,12 +21,8 @@ import org.apache.shiro.subject.PrincipalCollection;
 
 public class CustomRealm extends AuthorizingRealm {
 
-
-
     @Reference
     UserService userService;
-
-
 
 
     /**

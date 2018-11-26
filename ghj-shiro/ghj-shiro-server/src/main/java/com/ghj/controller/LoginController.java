@@ -46,9 +46,9 @@ public class LoginController {
             response.setBufferSize(1024);
             if (backUrl.contains("?")) {
 
-                return "redirect:"+backUrl+"serverToken:"+token+"userName:"+userName;
+                return "redirect:"+backUrl+"serverToken="+token+"&userName="+userName;
             } else {
-                return "redirect:"+backUrl+"?serverToken:"+token+"userName:"+userName;
+                return "redirect:"+backUrl+"?serverToken="+token+"&userName="+userName;
             }
 
         }
@@ -68,8 +68,8 @@ public class LoginController {
         if (StringUtils.isEmpty(hava)) {
             subject.login(new UsernamePasswordToken(username, password));
             String token = UUID.randomUUID().toString().replace("-", "");
-            stringRedisTemplate.opsForValue().set("sso-server-sessionId_" + sessionId, token, subject.getSession().getTimeout());
-            stringRedisTemplate.opsForValue().set("sso-server-token_" + token, token, subject.getSession().getTimeout());
+            stringRedisTemplate.opsForValue().set("sso-server-sessionId_" + sessionId, token);
+            stringRedisTemplate.opsForValue().set("sso-server-token_" + token, token);
         }
         return new Token(backUrl,true);
     }
