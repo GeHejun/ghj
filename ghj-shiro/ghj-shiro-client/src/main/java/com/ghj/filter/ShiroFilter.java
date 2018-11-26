@@ -1,22 +1,30 @@
 package com.ghj.filter;
 
 import com.ghj.config.OkHttpUtil;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import org.apache.shiro.SecurityUtils;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.web.filter.AccessControlFilter;
+import org.omg.CORBA.NameValuePair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+import sun.net.www.http.HttpClient;
 
 @PropertySource(value = "classpath:shiro.properties")
 @Component("xx")
@@ -55,14 +63,17 @@ public class ShiroFilter extends AccessControlFilter {
         }
         String serverToken = request.getParameter("serverToken");
         if (!StringUtils.isEmpty(serverToken)) {
-            Map<String, String> params = new HashMap<>();
-            params.put("token", serverToken);
-            JsonObject jsonObject = OkHttpUtil.syncGet(ssoValidateUrl, params);
-            if (jsonObject != null) {
-                Boolean isValid = jsonObject.get("isValid").getAsBoolean();
-                if (isValid) {
+            OkHttpClient okHttpClient = new OkHttpClient();
+            FormBody formBody = new FormBody.Builder().add("token",serverToken).build();
+            Request okRequest = new Request.Builder().post(formBody).url(ssoValidateUrl).build();
+            Response execute = okHttpClient.newCall(okRequest).execute();
+            String s = execute.body().toString();
+            if (s != null) {
+//                Boolean isValid = jsonObject.get("isValid").getAsBoolean();
+//                if (isValid) {
+                    stringRedisTemplate.opsForValue().set("sso-client-sessionId_" + sessionId,token);
                     return  true;
-                }
+//                }
             }
         }
         return false;

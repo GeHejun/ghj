@@ -76,14 +76,13 @@ public class LoginController {
 
     @RequestMapping("/validate")
     @ResponseBody
-    public String validate(HttpServletRequest request) {
+    public Token validate(HttpServletRequest request) {
         String tokenParam = request.getParameter("token");
         String token = stringRedisTemplate.opsForValue().get("sso-server-token_" + tokenParam);
-        Gson gson = new Gson();
         if (!StringUtils.isEmpty(token)) {
-            gson.toJson(new Token(true));
+            new Token(true);
         }
-        return gson.toJson(new Token(false));
+        return new Token(false);
     }
 
 }
