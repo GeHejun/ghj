@@ -80,7 +80,7 @@ public class LoginController {
         String tokenParam = request.getParameter("token");
         String token = stringRedisTemplate.opsForValue().get("sso-server-token_" + tokenParam);
         if (!StringUtils.isEmpty(token)) {
-            new Token(true);
+           return new Token(true);
         }
         return new Token(false);
     }

@@ -11,10 +11,8 @@ import java.util.Map;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+
+import okhttp3.*;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.omg.CORBA.NameValuePair;
@@ -64,14 +62,14 @@ public class ShiroFilter extends AccessControlFilter {
         String serverToken = request.getParameter("serverToken");
         if (!StringUtils.isEmpty(serverToken)) {
             OkHttpClient okHttpClient = new OkHttpClient();
-            FormBody formBody = new FormBody.Builder().add("token",serverToken).build();
-            Request okRequest = new Request.Builder().post(formBody).url(ssoValidateUrl).build();
+            RequestBody formBody = new FormBody.Builder().add("token",serverToken).build();
+            Request okRequest = new Request.Builder().url(ssoValidateUrl).post(formBody).build();
             Response execute = okHttpClient.newCall(okRequest).execute();
             String s = execute.body().toString();
             if (s != null) {
 //                Boolean isValid = jsonObject.get("isValid").getAsBoolean();
 //                if (isValid) {
-                    stringRedisTemplate.opsForValue().set("sso-client-sessionId_" + sessionId,token);
+                    stringRedisTemplate.opsForValue().set("sso-client-sessionId_" + sessionId,serverToken);
                     return  true;
 //                }
             }

@@ -6,8 +6,8 @@ spring:
       name: ghj-shiro-consumer
     base-package: com.ghj
     registry:
-#      address: 172.16.219.130                   # zookeeper注册中心的地址
-      address: 127.0.0.1
+      address: 172.16.219.130                   # zookeeper注册中心的地址
+#      address: 127.0.0.1
       port: 2181                           # zookeeper注册中心的端口
     protocol:
       name: dubbo
@@ -27,8 +27,8 @@ spring:
       servlet:
        content-type: text/html
   redis:
-    host: 127.0.0.1
-#    host: 172.16.219.130
+#    host: 127.0.0.1
+    host: 172.16.219.130
     port: 6379
   resources:
     static-locations: classpath:/static
